@@ -16,8 +16,14 @@ namespace Hero
 
       public void OnHorizontalMovement(InputAction.CallbackContext context)
       {
-         var direction = context.ReadValue<float>();
+         var direction = context.ReadValue<Vector2>();
          hero.SetDirection(direction);
+      }
+
+      public void OnJump(InputAction.CallbackContext context)
+      {
+         if (context.started) 
+            hero.Jump();
       }
 
       public void OnSaySomething(InputAction.CallbackContext context)
