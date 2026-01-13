@@ -14,14 +14,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SaySomething",
-                    "type": "Button",
-                    "id": "ba5c63db-96e6-4587-8504-3005e06b3eb1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "d05a69e8-47a6-4094-8d9a-485141f895b4",
@@ -140,17 +132,6 @@
                     "action": "HorizontalMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "fa93b38d-91cd-4c44-b068-9a1c26f964fb",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SaySomething",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

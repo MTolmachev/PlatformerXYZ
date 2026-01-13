@@ -25,11 +25,5 @@ namespace Hero
          if (context.started) 
             hero.Jump();
       }
-
-      public void OnSaySomething(InputAction.CallbackContext context)
-      {
-         if(context.canceled)
-            hero.SaySomething();
-      }
    }
 }

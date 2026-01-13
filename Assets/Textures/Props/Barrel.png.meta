@@ -112,11 +112,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 33.142857
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -132,12 +132,12 @@ TextureImporter:
       name: Barrel_1
       rect:
         serializedVersion: 2
-        x: 33
-        y: 0
-        width: 33.142857
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 32
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: Barrel_2
       rect:
         serializedVersion: 2
-        x: 66
-        y: 0
-        width: 33.142857
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 64
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,12 +174,12 @@ TextureImporter:
       name: Barrel_3
       rect:
         serializedVersion: 2
-        x: 99
-        y: 0
-        width: 33.142857
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 96
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,12 +195,12 @@ TextureImporter:
       name: Barrel_4
       rect:
         serializedVersion: 2
-        x: 132
-        y: 0
-        width: 33.142857
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 128
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,12 +216,12 @@ TextureImporter:
       name: Barrel_5
       rect:
         serializedVersion: 2
-        x: 165
-        y: 0
-        width: 29
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 160
+        y: 2
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,12 +237,12 @@ TextureImporter:
       name: Barrel_6
       rect:
         serializedVersion: 2
-        x: 194
-        y: 0
+        x: 195
+        y: 2
         width: 37
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
