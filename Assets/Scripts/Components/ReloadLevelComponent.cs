@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Character;
 
 namespace Components
 {
@@ -9,6 +10,7 @@ namespace Components
         {
             var scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
+            
         }
     }
 }
