@@ -15,6 +15,11 @@ namespace Character
         private Vector2 direction;
         private Rigidbody2D rb;
         private SpriteRenderer sr;
+        private Animator animator;
+        
+        private static readonly int IsRunning = Animator.StringToHash("isRunning");
+        private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
+        private static readonly int Grounded = Animator.StringToHash("isGrounded");
 
         private int gold = 0;
 
@@ -28,14 +33,17 @@ namespace Character
         {
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponent<SpriteRenderer>();
+            animator = GetComponent<Animator>();
         }
         private void FixedUpdate()
         {
             rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
-            if(direction.x > 0)
-                sr.flipX = false;
-            else if(direction.x < 0)
-                sr.flipX = true;
+
+            UpdateSpriteDirection();
+            
+            animator.SetBool(Grounded, IsGrounded());
+            animator.SetFloat(VerticalVelocity, rb.velocity.y);
+            animator.SetBool(IsRunning, direction.x != 0);
         }
 
         public void Jump()
@@ -53,6 +61,14 @@ namespace Character
         private bool IsGrounded()
         {
             return layerCheck.isTouchingGround;
+        }
+
+        private void UpdateSpriteDirection()
+        {
+            if(direction.x > 0)
+                sr.flipX = false;
+            else if(direction.x < 0)
+                sr.flipX = true;
         }
     }
 }
