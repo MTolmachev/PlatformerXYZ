@@ -9,6 +9,7 @@ namespace Character
     {
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float damageJumpForce;
         [SerializeField] private LayerCheck layerCheck;
         [SerializeField] private TMP_Text goldText;
 
@@ -17,9 +18,12 @@ namespace Character
         private SpriteRenderer sr;
         private Animator animator;
         
+        private bool canDoubleJump;
+        
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
         private static readonly int Grounded = Animator.StringToHash("isGrounded");
+        private static readonly int Hit = Animator.StringToHash("isHit");
 
         private int gold = 0;
 
@@ -35,6 +39,8 @@ namespace Character
             sr = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
         }
+        
+        
         private void FixedUpdate()
         {
             rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
@@ -48,9 +54,24 @@ namespace Character
 
         public void Jump()
         {
-            if(IsGrounded())
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (IsGrounded())
+            {
+                MakeJump();
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump)
+            {
+                MakeJump();
+                canDoubleJump = false;
+            }
+                
             
+        }
+
+        private void MakeJump()
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
         public void SetDirection(Vector2 dir)
@@ -70,5 +91,12 @@ namespace Character
             else if(direction.x < 0)
                 sr.flipX = true;
         }
+
+        public void TakeDamage()
+        {
+            animator.SetTrigger(Hit);
+            rb.velocity = new Vector2(rb.velocity.x, damageJumpForce);
+        }
+            
     }
 }
