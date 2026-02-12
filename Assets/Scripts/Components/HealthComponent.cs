@@ -9,14 +9,20 @@ namespace Components
     {
         [SerializeField] private int maxHealth;
         [SerializeField] private UnityEvent onTakeDamage;
+        [SerializeField] private UnityEvent onTakeHeal;
         [SerializeField] private UnityEvent onDie;
         [SerializeField] private TMP_Text healthText;
-        
-        private int currentHealth;
+
+        public int CurrentHealth { get; private set; }
+
+        public int GetMaxHealth()
+        {
+            return maxHealth;
+        }
 
         private void Awake()
         {
-            currentHealth = maxHealth;
+            CurrentHealth = maxHealth;
         }
 
         private void Update()
@@ -26,15 +32,23 @@ namespace Components
 
         public void TakeDamage(int damage)
         {
-            currentHealth -= damage;
+            CurrentHealth -= damage;
             onTakeDamage?.Invoke();
-            if (currentHealth <= 0)
+            if (CurrentHealth <= 0)
                 onDie?.Invoke();
+        }
+
+        public void TakeHeal(int heal)
+        {
+            CurrentHealth += heal;
+            onTakeHeal?.Invoke();
+            if (CurrentHealth > maxHealth)
+                CurrentHealth = maxHealth;
         }
 
         private void ShowHealth()
         {
-            healthText.text = $"Health: {currentHealth.ToString()} / {maxHealth.ToString()}";
+            healthText.text = $"Health: {CurrentHealth.ToString()} / {maxHealth.ToString()}";
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Components
         public void DestroyObject()
         {
             Destroy(destroyableObject);
-            
         }
     }
 }

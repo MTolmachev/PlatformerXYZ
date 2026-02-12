@@ -1,4 +1,5 @@
 ﻿using System;
+using Components;
 using UnityEditor.UIElements;
 using UnityEngine;
 using TMPro;
@@ -12,7 +13,10 @@ namespace Character
         [SerializeField] private float damageJumpForce;
         [SerializeField] private LayerCheck layerCheck;
         [SerializeField] private TMP_Text goldText;
+        [SerializeField] private float interactionRadius;
+        [SerializeField] private LayerMask interactionLayer;
 
+        private readonly Collider2D[] interactionResult = new Collider2D[1];
         private Vector2 direction;
         private Rigidbody2D rb;
         private SpriteRenderer sr;
@@ -64,8 +68,6 @@ namespace Character
                 MakeJump();
                 canDoubleJump = false;
             }
-                
-            
         }
 
         private void MakeJump()
@@ -96,6 +98,22 @@ namespace Character
         {
             animator.SetTrigger(Hit);
             rb.velocity = new Vector2(rb.velocity.x, damageJumpForce);
+        }
+
+        public void Interact()
+        {
+            var size = Physics2D.OverlapCircleNonAlloc(
+                transform.position, 
+                interactionRadius, 
+                interactionResult, 
+                interactionLayer);
+
+            for (int i = 0; i < size; i++)
+            {
+                var interactable = interactionResult[i].GetComponent<InteractableComponent>();
+                if (interactable != null)
+                    interactable.Interact();
+            }
         }
             
     }

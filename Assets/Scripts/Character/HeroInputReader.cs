@@ -25,5 +25,11 @@ namespace Character
          if (context.started) 
             hero.Jump();
       }
+
+      public void OnInteract(InputAction.CallbackContext context)
+      {
+         if (context.started)
+            hero.Interact();
+      }
    }
 }
