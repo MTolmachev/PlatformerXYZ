@@ -6,7 +6,7 @@ namespace Components
 {
     public class EnterTriggerComponent : MonoBehaviour
     {
-        [SerializeField] private string tag;
+        [SerializeField] private new string tag;
         [SerializeField] private UnityEvent action;
         
         private void OnTriggerEnter2D(Collider2D other)

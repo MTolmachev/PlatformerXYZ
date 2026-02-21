@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Components
 {
-    public class HealthChangeComponent : MonoBehaviour
+    public class ModifyHealthComponent : MonoBehaviour
     {
         [SerializeField] private int amount;
         [SerializeField] private ChangeHealthType type;

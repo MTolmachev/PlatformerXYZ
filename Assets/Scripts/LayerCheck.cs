@@ -6,7 +6,7 @@ using UnityEngine;
 public class LayerCheck : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     public bool isTouchingGround;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Character;
 
 namespace Components
@@ -6,7 +7,13 @@ namespace Components
     public class CollectObjectComponent : MonoBehaviour
     {
         [SerializeField] private int cost;
-        [SerializeField] private Hero character;
+        private Hero character;
+
+        private void Start()
+        {
+            character = FindObjectOfType<Hero>();
+        }
+
         public void Collect()
         {
             character.CollectGold(cost);

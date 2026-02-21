@@ -155,14 +155,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameRate: 10
-  loop: 1
-  sprites:
-  - {fileID: -1160010366554915182, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  - {fileID: 5853386924358050850, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  - {fileID: 4392103141360296039, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  - {fileID: -1678251164886203106, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  - {fileID: 378231322344738570, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  - {fileID: -4773631299378667110, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
+  clips:
+  - name: idle
+    sprites:
+    - {fileID: -1160010366554915182, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    - {fileID: 5853386924358050850, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    - {fileID: 4392103141360296039, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    - {fileID: -1678251164886203106, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    - {fileID: 378231322344738570, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    - {fileID: -4773631299378667110, guid: 46862bb2782d5b84a837f97abf1b6a2b, type: 3}
+    loop: 1
+    allowNextClip: 0
+    onComplete:
+      m_PersistentCalls:
+        m_Calls: []

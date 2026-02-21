@@ -6,7 +6,7 @@ namespace Components
 {
     public class EnterCollisionComponent : MonoBehaviour
     {
-        [SerializeField] private string tag;
+        [SerializeField] private new string tag;
         [SerializeField] private EnterEvent action;
         
         private void OnCollisionEnter2D(Collision2D other)

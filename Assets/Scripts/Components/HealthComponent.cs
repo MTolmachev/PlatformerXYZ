@@ -13,6 +13,8 @@ namespace Components
         [SerializeField] private UnityEvent onDie;
         [SerializeField] private TMP_Text healthText;
 
+        [SerializeField] private bool canTakeDamage = true;
+        
         public int CurrentHealth { get; private set; }
 
         public int GetMaxHealth()
@@ -32,6 +34,7 @@ namespace Components
 
         public void TakeDamage(int damage)
         {
+            if(!canTakeDamage) return;
             CurrentHealth -= damage;
             onTakeDamage?.Invoke();
             if (CurrentHealth <= 0)

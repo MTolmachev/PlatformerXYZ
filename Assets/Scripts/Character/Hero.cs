@@ -15,11 +15,13 @@ namespace Character
         [SerializeField] private TMP_Text goldText;
         [SerializeField] private float interactionRadius;
         [SerializeField] private LayerMask interactionLayer;
+        [SerializeField] private SpawnComponent footStepPerticles;
+        [SerializeField] private SpawnComponent jumpAirPerticles;
+        [SerializeField] private ParticleSystem hitParticles;
 
         private readonly Collider2D[] interactionResult = new Collider2D[1];
         private Vector2 direction;
         private Rigidbody2D rb;
-        private SpriteRenderer sr;
         private Animator animator;
         
         private bool canDoubleJump;
@@ -29,18 +31,17 @@ namespace Character
         private static readonly int Grounded = Animator.StringToHash("isGrounded");
         private static readonly int Hit = Animator.StringToHash("isHit");
 
-        private int gold = 0;
+        private int coinsValue = 0;
 
         public void CollectGold(int amount)
         {
-            gold += amount;
-            goldText.text = gold.ToString();
+            coinsValue += amount;
+            goldText.text = coinsValue.ToString();
         }
         
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            sr = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
         }
         
@@ -74,6 +75,7 @@ namespace Character
         {
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            SpawnJumpAir();
         }
 
         public void SetDirection(Vector2 dir)
@@ -89,15 +91,18 @@ namespace Character
         private void UpdateSpriteDirection()
         {
             if(direction.x > 0)
-                sr.flipX = false;
+                transform.localScale = Vector3.one;
             else if(direction.x < 0)
-                sr.flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
         }
 
         public void TakeDamage()
         {
             animator.SetTrigger(Hit);
             rb.velocity = new Vector2(rb.velocity.x, damageJumpForce);
+            
+            if(coinsValue > 0)
+                SpawnCoins();
         }
 
         public void Interact()
@@ -115,6 +120,32 @@ namespace Character
                     interactable.Interact();
             }
         }
+
+        public void SpawnFootDust()
+        {
+            footStepPerticles.Spawn();
+        }
+        
+        public void SpawnJumpAir()
+        {
+            jumpAirPerticles.Spawn();
+        }
+
+        private void SpawnCoins()
+        {
+            var numCoinsToDispose = Mathf.Min(coinsValue, 5);
+            coinsValue -= numCoinsToDispose;
+            goldText.text = coinsValue.ToString();
+
+            var burst = hitParticles.emission.GetBurst(0);
+            burst.count = numCoinsToDispose;
+            hitParticles.emission.SetBurst(0, burst);
+            
+            hitParticles.gameObject.SetActive(true);
+            hitParticles.Play();
+        }
+
+        
             
     }
 }
