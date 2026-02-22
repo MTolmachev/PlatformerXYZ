@@ -144,6 +144,8 @@ namespace Character
             hitParticles.gameObject.SetActive(true);
             hitParticles.Play();
         }
+        
+        
 
         
             
