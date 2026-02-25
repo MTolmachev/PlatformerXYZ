@@ -33,6 +33,11 @@ namespace Character
 
         private int coinsValue = 0;
 
+        public int GetCoinsValue()
+        {
+            return coinsValue;
+        }
+
         public void CollectGold(int amount)
         {
             coinsValue += amount;
