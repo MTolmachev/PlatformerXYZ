@@ -17,6 +17,7 @@ namespace Components
         public void Collect()
         {
             character.CollectGold(cost);
+            
         }
     }
 }

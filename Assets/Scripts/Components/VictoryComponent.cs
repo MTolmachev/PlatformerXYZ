@@ -14,7 +14,7 @@ namespace Components
         {
             Time.timeScale = 0;
             victoryWindow.SetActive(true);
-            coinText.text = $"Coins got: {character.GetCoinsValue()} / 170";
+            coinText.text = $"Coins got: {character.GetCoinsValue()} / 150";
         }
     }
 }

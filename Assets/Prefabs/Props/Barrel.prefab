@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5389779883747675545}
   - component: {fileID: 5389779883747675544}
-  - component: {fileID: 5389779883747675547}
   - component: {fileID: 512025598348170963}
   - component: {fileID: 2624123535400101325}
+  - component: {fileID: 5828913610021062476}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1398207117
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1380203805528671675, guid: f353100654db4ec4199bfe06f3f0bab4,
     type: 3}
@@ -85,32 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5389779883747675547
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389779883747675526}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.012858868, y: 0.39514017}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.69116116, y: 0.79028034}
-  m_EdgeRadius: 0
 --- !u!50 &512025598348170963
 Rigidbody2D:
   serializedVersion: 4
@@ -126,7 +100,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -144,3 +118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6588c60f50d417893617bd4dbe96b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &5828913610021062476
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389779883747675526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014816284, y: 0.38970578}
+  m_Size: {x: 0.713562, y: 0.77941155}
+  m_Direction: 0
