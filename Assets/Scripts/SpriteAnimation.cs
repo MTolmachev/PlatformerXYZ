@@ -56,7 +56,7 @@ public class SpriteAnimation : MonoBehaviour
     private void StartAnimation()
     {
         nextFrameTime = Time.time + secondsPerFrame;
-        isPlaying = true;
+        enabled = isPlaying = true;
         currentFrame = 0;
     }
 
@@ -79,9 +79,9 @@ public class SpriteAnimation : MonoBehaviour
             }
             else
             {
+                enabled = isPlaying = clip.AllowNextClip;
                 clip.OnComplete?.Invoke();
                 onComplete?.Invoke(clip.Name);
-                enabled = isPlaying = clip.AllowNextClip;
                 if (clip.AllowNextClip)
                 {
                     currentFrame = 0;

@@ -29,9 +29,10 @@ namespace Components
 
         private void Update()
         {
-            ShowHealth();
+            if(healthText)
+                ShowHealth();
         }
-
+        
         public void TakeDamage(int damage)
         {
             if(!canTakeDamage) return;

@@ -157,4 +157,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 1
   type: 0
-  target: {fileID: 0}

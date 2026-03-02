@@ -8,9 +8,8 @@ namespace Components
     {
         [SerializeField] private int amount;
         [SerializeField] private ChangeHealthType type;
-        [SerializeField] private GameObject target;
 
-        public void ApplyHealthChange()
+        public void ApplyHealthChange(GameObject target)
         {
             var healthComponent = target.GetComponent<HealthComponent>();
             if (healthComponent == null) return;
