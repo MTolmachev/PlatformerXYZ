@@ -3,6 +3,9 @@ using Components;
 using UnityEditor.UIElements;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
+using UnityEditor.Animations;
+using Utils;
 
 namespace Character
 {
@@ -11,6 +14,7 @@ namespace Character
         [SerializeField] private float speed;
         [SerializeField] private float jumpForce;
         [SerializeField] private float damageJumpForce;
+        [SerializeField] private int damage;
         [SerializeField] private LayerCheck layerCheck;
         [SerializeField] private TMP_Text goldText;
         [SerializeField] private float interactionRadius;
@@ -19,17 +23,24 @@ namespace Character
         [SerializeField] private SpawnComponent jumpAirPerticles;
         [SerializeField] private ParticleSystem hitParticles;
 
-        private readonly Collider2D[] interactionResult = new Collider2D[1];
+        [SerializeField] private AnimatorController armed;
+        [SerializeField] private AnimatorController unarmed;
+
+        [SerializeField] private CheckCircleOverlap attackRange;
         private Vector2 direction;
         private Rigidbody2D rb;
         private Animator animator;
         
+        private readonly Collider2D[] interactionResult = new Collider2D[1];
+        
         private bool canDoubleJump;
+        private bool isArmed;
         
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
         private static readonly int Grounded = Animator.StringToHash("isGrounded");
         private static readonly int Hit = Animator.StringToHash("isHit");
+        private static readonly int Attacking = Animator.StringToHash("attack");
 
         private int coinsValue = 0;
 
@@ -48,6 +59,7 @@ namespace Character
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = unarmed;
         }
         
         
@@ -150,9 +162,28 @@ namespace Character
             hitParticles.Play();
         }
         
-        
-
-        
+        public void Attack()
+        {
+            if(!isArmed) return;
+            animator.SetTrigger(Attacking);
             
+        }
+
+        public void OnAttack()
+        {
+            var gos = attackRange.GetObjectsInRange();
+            foreach (var go in gos)
+            {
+                var hp = go.GetComponent<HealthComponent>();
+                if (hp != null && go.CompareTag("Enemy"))
+                    hp.TakeDamage(damage);
+            }
+        }
+
+        public void ArmHero()
+        {
+            isArmed = true;
+            animator.runtimeAnimatorController = armed;
+        }
     }
 }

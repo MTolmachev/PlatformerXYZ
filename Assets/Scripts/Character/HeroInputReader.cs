@@ -31,5 +31,11 @@ namespace Character
          if (context.started)
             hero.Interact();
       }
+
+      public void OnAttack(InputAction.CallbackContext context)
+      {
+         if (context.started)
+            hero.Attack();
+      }
    }
 }
