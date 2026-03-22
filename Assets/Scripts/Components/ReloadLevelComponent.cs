@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Character;
+using Model;
 
 namespace Components
 {
@@ -8,6 +9,9 @@ namespace Components
     {
         public void Reload()
         {
+            var session = FindObjectOfType<GameSession>();
+            session.ResetToLevelStart();
+            
             var scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using Components;
+using Model;
 using UnityEditor.UIElements;
 using UnityEngine;
 using TMPro;
@@ -34,7 +35,6 @@ namespace Character
         private readonly Collider2D[] interactionResult = new Collider2D[1];
         
         private bool canDoubleJump;
-        private bool isArmed;
         
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
@@ -42,17 +42,17 @@ namespace Character
         private static readonly int Hit = Animator.StringToHash("isHit");
         private static readonly int Attacking = Animator.StringToHash("attack");
 
-        private int coinsValue = 0;
+        private GameSession session;
 
         public int GetCoinsValue()
         {
-            return coinsValue;
+            return session.Data.coins;
         }
 
         public void CollectGold(int amount)
         {
-            coinsValue += amount;
-            goldText.text = coinsValue.ToString();
+            session.Data.coins += amount;
+            goldText.text = session.Data.coins.ToString();
         }
         
         private void Awake()
@@ -61,8 +61,20 @@ namespace Character
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = unarmed;
         }
-        
-        
+
+        public void OnHealthChanged(int health)
+        {
+            session.Data.hp = health;
+        }
+
+        private void Start()
+        {
+            session = FindObjectOfType<GameSession>();
+            var healthComponent = GetComponent<HealthComponent>();
+            healthComponent.SetHealth(session.Data.hp);
+            UpdateHeroWeapon();
+        }
+
         private void FixedUpdate()
         {
             rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
@@ -118,7 +130,7 @@ namespace Character
             animator.SetTrigger(Hit);
             rb.velocity = new Vector2(rb.velocity.x, damageJumpForce);
             
-            if(coinsValue > 0)
+            if(session.Data.coins > 0)
                 SpawnCoins();
         }
 
@@ -150,9 +162,9 @@ namespace Character
 
         private void SpawnCoins()
         {
-            var numCoinsToDispose = Mathf.Min(coinsValue, 5);
-            coinsValue -= numCoinsToDispose;
-            goldText.text = coinsValue.ToString();
+            var numCoinsToDispose = Mathf.Min(session.Data.coins, 5);
+            session.Data.coins -= numCoinsToDispose;
+            goldText.text = session.Data.coins.ToString();
 
             var burst = hitParticles.emission.GetBurst(0);
             burst.count = numCoinsToDispose;
@@ -164,7 +176,7 @@ namespace Character
         
         public void Attack()
         {
-            if(!isArmed) return;
+            if(!session.Data.isArmed) return;
             animator.SetTrigger(Attacking);
             
         }
@@ -182,8 +194,13 @@ namespace Character
 
         public void ArmHero()
         {
-            isArmed = true;
-            animator.runtimeAnimatorController = armed;
+            session.Data.isArmed = true;
+            UpdateHeroWeapon();
+        }
+
+        private void UpdateHeroWeapon()
+        {
+            animator.runtimeAnimatorController = session.Data.isArmed ? armed : unarmed;
         }
     }
 }
