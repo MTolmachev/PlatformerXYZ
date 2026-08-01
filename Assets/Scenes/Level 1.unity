@@ -7112,7 +7112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.54, y: -0.5, z: -10}
+  m_LocalPosition: {x: 27.17, y: -9.47, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8164,7 +8164,18 @@ MonoBehaviour:
   tag: Player
   action:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 793076433}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &793076435
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9240,7 +9251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971312687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.54, y: -0.5, z: -10}
+  m_LocalPosition: {x: 27.17, y: -9.47, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 539709540}
@@ -10988,6 +10999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helm (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8299332808602088491, guid: 0a77f2a1e80e54f4baa20ad5455052e6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a77f2a1e80e54f4baa20ad5455052e6, type: 3}
 --- !u!1 &1262756362
@@ -11352,7 +11368,18 @@ MonoBehaviour:
   tag: Player
   action:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1301238202}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &1301238204
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12587,7 +12614,18 @@ MonoBehaviour:
   tag: Player
   action:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517095059}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &1517095061
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24219,8 +24257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    coins: 0
+    maxHp: 5
     hp: 5
+    coins: 0
     isArmed: 0
 --- !u!4 &2112915835
 Transform:
@@ -24377,7 +24416,7 @@ PrefabInstance:
     - target: {fileID: 735425661566698737, guid: 671dc25f591a2684a8d33cd82d76873c,
         type: 3}
       propertyPath: maxHealth
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 735425661566698741, guid: 671dc25f591a2684a8d33cd82d76873c,
         type: 3}
@@ -24675,6 +24714,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695607659, guid: 5c2ab90aa868760499437b82ae912a40, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 695607661, guid: 5c2ab90aa868760499437b82ae912a40, type: 3}
+      propertyPath: layer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509153538399785230, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509153539215971085, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509153539260648914, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509153539377261219, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: layer.m_Bits
+      value: 3895
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509153539377261221, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7509153539458339608, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
       propertyPath: goldText
@@ -24688,12 +24760,12 @@ PrefabInstance:
     - target: {fileID: 7509153539458339611, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.54
+      value: 27.17
       objectReference: {fileID: 0}
     - target: {fileID: 7509153539458339611, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -9.47
       objectReference: {fileID: 0}
     - target: {fileID: 7509153539458339611, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
@@ -24740,6 +24812,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 7509153539458339612, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7509153539458339685, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
       propertyPath: healthText
@@ -24750,6 +24827,11 @@ PrefabInstance:
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1301238202}
+    - target: {fileID: 7509153539919358540, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2ab90aa868760499437b82ae912a40, type: 3}
 --- !u!1001 &7755495403119528044

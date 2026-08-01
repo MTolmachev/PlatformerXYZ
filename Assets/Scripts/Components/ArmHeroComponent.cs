@@ -1,4 +1,5 @@
 ﻿using Character;
+using Creatures;
 using UnityEngine;
 
 namespace Components

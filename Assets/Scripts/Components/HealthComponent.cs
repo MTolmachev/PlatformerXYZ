@@ -17,7 +17,6 @@ namespace Components
 
         [SerializeField] private bool canTakeDamage = true;
         
-        private GameSession session;
         
         public int CurrentHealth { get; private set; }
 
@@ -25,17 +24,10 @@ namespace Components
         {
             return maxHealth;
         }
-
-        private void Start()
+        
+        public void SetMaxHealth(int hp)
         {
-            session = FindObjectOfType<GameSession>();
-            CurrentHealth = session.Data.hp;
-            ShowHealth();
-
-        }
-
-        private void Update()
-        {
+            maxHealth = hp;
             ShowHealth();
         }
         
@@ -47,6 +39,7 @@ namespace Components
             onTakeDamage?.Invoke();
             if (CurrentHealth <= 0)
                 onDie?.Invoke();
+            ShowHealth();
         }
 
         public void TakeHeal(int heal)
@@ -56,6 +49,7 @@ namespace Components
             onTakeHeal?.Invoke();
             if (CurrentHealth > maxHealth)
                 CurrentHealth = maxHealth;
+            ShowHealth();
         }
 
         private void ShowHealth()
@@ -66,6 +60,7 @@ namespace Components
         public void SetHealth(int dataHp)
         {
             CurrentHealth = dataHp;
+            ShowHealth();
         }
         
         [Serializable]

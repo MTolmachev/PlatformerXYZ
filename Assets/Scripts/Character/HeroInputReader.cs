@@ -1,4 +1,5 @@
 ﻿using System;
+using Creatures;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -32,7 +33,7 @@ namespace Character
             hero.Interact();
       }
 
-      public void OnAttack(InputAction.CallbackContext context)
+      public void OnAttackInput(InputAction.CallbackContext context)
       {
          if (context.started)
             hero.Attack();

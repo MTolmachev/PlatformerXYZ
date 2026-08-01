@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Character;
+using Creatures;
 
 namespace Components
 {
