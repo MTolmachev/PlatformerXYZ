@@ -53,8 +53,11 @@ namespace Model
             var sessions = FindObjectsOfType<GameSession>();
             foreach (var session in sessions)
             {
-                if(session != this)
+                if (session != this)
+                {
+                    Debug.Log(session.gameObject.name);
                     return true;
+                }
             }
             return false;
         }
