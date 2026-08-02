@@ -4,12 +4,14 @@ using UnityEngine;
 namespace Creatures
 {
     public class Creature : MonoBehaviour
-    { 
-        [Header("Params")]
+    {
+        [Header("Params")] [SerializeField] private bool invertScale;
         [SerializeField] private float speed;
         [SerializeField] protected float jumpForce;
         [SerializeField] protected float damageJumpForce;
+/*
         [SerializeField] private int damage;
+*/
         
         [Header("Checkers")]
         [SerializeField] private LayerCheck layerCheck;
@@ -57,10 +59,11 @@ namespace Creatures
         
         private void UpdateSpriteDirection()
         {
+            var multiplier = invertScale ? -1 : 1;
             if(direction.x > 0)
-                transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(multiplier, 1, 1);
             else if(direction.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(-1 * multiplier, 1, 1);
         }
         
         public virtual void TakeDamage()

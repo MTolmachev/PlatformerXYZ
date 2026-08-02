@@ -1,5 +1,5 @@
 ﻿using System;
-using Model;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,9 +16,15 @@ namespace Components
         [SerializeField] private TMP_Text healthText;
 
         [SerializeField] private bool canTakeDamage = true;
+        [SerializeField] private float immunityDuration = 1f;
         
         
         public int CurrentHealth { get; private set; }
+
+        private void Awake()
+        {
+            CurrentHealth = maxHealth;
+        }
 
         public int GetMaxHealth()
         {
@@ -34,21 +40,21 @@ namespace Components
         public void TakeDamage(int damage)
         {
             if(!canTakeDamage) return;
-            CurrentHealth -= damage;
+            CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
             onChange?.Invoke(CurrentHealth);
             onTakeDamage?.Invoke();
             if (CurrentHealth <= 0)
                 onDie?.Invoke();
             ShowHealth();
+            if (!gameObject) return;
+            StartCoroutine(DamageImmunity(immunityDuration));
         }
 
         public void TakeHeal(int heal)
         {
-            CurrentHealth += heal;
+            CurrentHealth = Mathf.Min(CurrentHealth + heal, maxHealth);;
             onChange?.Invoke(CurrentHealth);
             onTakeHeal?.Invoke();
-            if (CurrentHealth > maxHealth)
-                CurrentHealth = maxHealth;
             ShowHealth();
         }
 
@@ -61,6 +67,13 @@ namespace Components
         {
             CurrentHealth = dataHp;
             ShowHealth();
+        }
+
+        private IEnumerator DamageImmunity(float duration)
+        {
+            canTakeDamage = false;
+            yield return new WaitForSeconds(duration);
+            canTakeDamage = true;
         }
         
         [Serializable]

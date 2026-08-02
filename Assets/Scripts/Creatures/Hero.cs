@@ -9,8 +9,10 @@ namespace Creatures
     public class Hero : Creature
     {
         [SerializeField] private TMP_Text goldText;
+/*
         [SerializeField] private float interactionRadius;
         [SerializeField] private LayerMask interactionLayer;
+*/
         [SerializeField] private ParticleSystem hitParticles;
 
         [SerializeField] private AnimatorController armed;
