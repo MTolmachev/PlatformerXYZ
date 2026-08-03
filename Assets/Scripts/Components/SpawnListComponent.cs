@@ -11,15 +11,18 @@ namespace Components
 
         public void Spawn(string id)
         {
-            var spawner = spawners.FirstOrDefault(element => element.Id == id);
-            spawner?.Component.Spawn();
+            var spawner = spawners.FirstOrDefault(element => element.id == id);
+            spawner?.component.Spawn();
         }
 
         [Serializable]
         public class SpawnData
         {
-            public string Id;
-            public SpawnComponent Component;
+            [FormerlySerializedAs("Id")]
+            public string id;
+
+            [FormerlySerializedAs("Component")]
+            public SpawnComponent component;
         }
     }
 }

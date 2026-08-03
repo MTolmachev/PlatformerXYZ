@@ -55,9 +55,17 @@ namespace Creatures
 
         private IEnumerator AgroToHero()
         {
+            LookAtHero();
             particles.Spawn("Exclamation");
             yield return new WaitForSeconds(alarmDelay);
             StartState(GoToHero());
+        }
+
+        private void LookAtHero()
+        {
+            creature.SetDirection(Vector2.zero);
+            var direction = GetDirectionToTarget();
+            creature.UpdateSpriteDirection(direction);
         }
 
         private IEnumerator GoToHero()
@@ -74,10 +82,12 @@ namespace Creatures
                 }
                 yield return null;
             }
+            
+            creature.SetDirection(Vector2.zero);
             particles.Spawn("Miss");
             yield return new WaitForSeconds(missCooldown);
-            StartState(patrol.DoPatrol());
             
+            StartState(patrol.DoPatrol());
         }
 
         private IEnumerator Attack()
@@ -93,10 +103,16 @@ namespace Creatures
 
         private void SetDirectionToTarget()
         {
+            var direction = GetDirectionToTarget();
+            creature.SetDirection(direction);
+            
+        }
+
+        private Vector2 GetDirectionToTarget()
+        {
             var direction = target.transform.position - transform.position;
             direction.y = 0;
-            creature.SetDirection(direction.normalized);
-            
+            return direction.normalized;
         }
 
         private void StartState(IEnumerator coroutine)

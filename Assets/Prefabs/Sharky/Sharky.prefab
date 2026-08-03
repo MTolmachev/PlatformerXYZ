@@ -134,6 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: Player
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
@@ -686,10 +689,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawners:
-  - Id: Exclamation
-    Component: {fileID: 4767669655089626892}
-  - Id: Miss
-    Component: {fileID: 6477969526274254037}
+  - id: Exclamation
+    component: {fileID: 4767669655089626892}
+  - id: Miss
+    component: {fileID: 6477969526274254037}
 --- !u!114 &602663116
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -59,3 +59,6 @@ TagManager:
   - name: Creatures
     uniqueID: 4103315511
     locked: 0
+  - name: TileMap
+    uniqueID: 1699206111
+    locked: 0

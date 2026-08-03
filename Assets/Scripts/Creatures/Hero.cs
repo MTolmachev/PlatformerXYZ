@@ -3,20 +3,19 @@ using Model;
 using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
+using Utils;
 
 namespace Creatures
 {
     public class Hero : Creature
     {
-        [SerializeField] private TMP_Text goldText;
-/*
-        [SerializeField] private float interactionRadius;
-        [SerializeField] private LayerMask interactionLayer;
-*/
-        [SerializeField] private ParticleSystem hitParticles;
+        private static readonly int ThrowKey = Animator.StringToHash("throw");
 
+        [SerializeField] private TMP_Text goldText;
+        [SerializeField] private ParticleSystem hitParticles;
         [SerializeField] private AnimatorController armed;
         [SerializeField] private AnimatorController unarmed;
+        [SerializeField] private Cooldown throwCooldown;
         
         [SerializeField] private CheckCircleOverlap interactionCheck;
         private bool canDoubleJump;
@@ -129,6 +128,21 @@ namespace Creatures
         private void UpdateHeroWeapon()
         {
             Animator.runtimeAnimatorController = session.Data.isArmed ? armed : unarmed;
+        }
+
+        public void OnDoThrow()
+        {
+            particles.Spawn("Throw");
+        }
+        
+
+        public void Throw()
+        {
+            if (throwCooldown.IsReady)
+            {
+                Animator.SetTrigger(ThrowKey);
+                throwCooldown.Reset();
+            }
         }
     }
 }

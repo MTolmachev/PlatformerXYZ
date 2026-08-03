@@ -50,19 +50,19 @@ namespace Creatures
         {
             Rb.velocity = new Vector2(direction.x * speed, Rb.velocity.y);
 
-            UpdateSpriteDirection();
+            UpdateSpriteDirection(direction);
             
             Animator.SetBool(Grounded, IsGrounded());
             Animator.SetFloat(VerticalVelocity, Rb.velocity.y);
             Animator.SetBool(IsRunning, direction.x != 0);
         }
         
-        private void UpdateSpriteDirection()
+        public void UpdateSpriteDirection(Vector2 dir)
         {
             var multiplier = invertScale ? -1 : 1;
-            if(direction.x > 0)
+            if(dir.x > 0)
                 transform.localScale = new Vector3(multiplier, 1, 1);
-            else if(direction.x < 0)
+            else if(dir.x < 0)
                 transform.localScale = new Vector3(-1 * multiplier, 1, 1);
         }
         
