@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7013872851304910054}
   - component: {fileID: 7013872851304910053}
   - component: {fileID: 7013872851304910075}
+  - component: {fileID: 7456857353877289170}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013872851304910052}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -28.78, y: -0.47, z: -6.962525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -150,8 +151,8 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7013872851304910053}
-        m_MethodName: ArmHero
+      - m_Target: {fileID: 7456857353877289170}
+        m_MethodName: Collect
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -161,9 +162,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7013872851304910075}
-        m_MethodName: DestroyObject
-        m_Mode: 1
+      - m_Target: {fileID: 7013872851304910053}
+        m_MethodName: ArmHero
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -197,3 +198,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableObject: {fileID: 7013872851304910052}
+--- !u!114 &7456857353877289170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013872851304910052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc4847b552e4128b8f6d24780ef6a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7013872851304910075}
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  amount: 1

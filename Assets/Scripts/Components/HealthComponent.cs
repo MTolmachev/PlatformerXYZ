@@ -82,5 +82,18 @@ namespace Components
         {
             
         }
+
+        public bool TryHeal(int amount)
+        {
+            if(amount <= 0) return false;
+            if(CurrentHealth >= maxHealth) return false;
+            CurrentHealth = Mathf.Min(CurrentHealth + amount, maxHealth);
+            
+            onChange?.Invoke(CurrentHealth);
+            onTakeHeal?.Invoke();
+            ShowHealth();
+            
+            return true;
+        }
     }
 }

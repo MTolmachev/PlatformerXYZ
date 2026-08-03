@@ -1,0 +1,25 @@
+﻿using Creatures;
+using UnityEngine;
+
+namespace Components.Collectables
+{
+    public class CoinsCollectableComponent : CollectObjectComponent
+    {
+        [Min(1)]
+        [SerializeField]  private int amount;
+        
+        protected override bool TryCollect(GameObject collector)
+        {
+            if(!collector.TryGetComponent<Hero>(out var hero))
+                return false;
+            hero.CollectGold(amount);
+            return true;
+        }
+
+        private enum CoinsType
+        {
+            Silver,
+            Gold
+        }
+    }
+}

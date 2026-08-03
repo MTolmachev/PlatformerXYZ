@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3336122608858458904}
   - component: {fileID: 412719392187504512}
   - component: {fileID: 1241702912546003070}
+  - component: {fileID: 5169542279765962321}
   m_Layer: 0
   m_Name: HealPot
   m_TagString: Untagged
@@ -129,7 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 1
   type: 1
-  target: {fileID: 0}
 --- !u!58 &3336122608858458904
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,23 +159,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: Player
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 96411147802259101}
-        m_MethodName: ApplyHealthChange
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1241702912546003070}
-        m_MethodName: DestroyObject
-        m_Mode: 1
+      - m_Target: {fileID: 5169542279765962321}
+        m_MethodName: Collect
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -197,3 +189,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableObject: {fileID: 8952948847994094135}
+--- !u!114 &5169542279765962321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952948847994094135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1b79a4b1214e20b7f16e069dcc4df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1241702912546003070}
+        m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  amount: 1

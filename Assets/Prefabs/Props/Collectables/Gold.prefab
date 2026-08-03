@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7749945594023385874}
   - component: {fileID: 7749945594023385875}
   - component: {fileID: 7749945594023385872}
-  - component: {fileID: 7749945594023385873}
   - component: {fileID: 7749945594023385903}
+  - component: {fileID: 8226998000513920751}
   m_Layer: 0
   m_Name: Gold
   m_TagString: Untagged
@@ -116,34 +116,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: Player
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7749945594023385873}
+      - m_Target: {fileID: 8226998000513920751}
         m_MethodName: Collect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: destroy
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7749945594023385874}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7749945594023385903}
-        m_MethodName: SetClip
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -165,19 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableObject: {fileID: 7749945594023385878}
---- !u!114 &7749945594023385873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7749945594023385878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47693594da85cc84bb4f3910d5e96f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 10
 --- !u!114 &7749945594023385903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,3 +193,41 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8226998000513920751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749945594023385878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20da4dba1ce4400cb9b96815ded3f96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7749945594023385874}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7749945594023385903}
+        m_MethodName: SetClip
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: destroy
+          m_BoolArgument: 0
+        m_CallState: 2
+  amount: 10

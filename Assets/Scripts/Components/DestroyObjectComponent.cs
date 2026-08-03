@@ -5,7 +5,7 @@ namespace Components
 {
     public class DestroyObjectComponent : MonoBehaviour
     {
-        [SerializeField] GameObject destroyableObject;
+        [SerializeField] private GameObject destroyableObject;
         
         public void DestroyObject()
         {

@@ -8,6 +8,7 @@ namespace Model
         public int maxHp;
         public int hp;
         public int coins;
+        public int swords;
         public bool isArmed;
 
         public PlayerData Clone()
@@ -17,6 +18,7 @@ namespace Model
                 maxHp = this.maxHp,
                 hp = this.hp,
                 coins = this.coins,
+                swords = this.swords,
                 isArmed = this.isArmed
             };
         }

@@ -12,10 +12,12 @@ namespace Creatures
         private static readonly int ThrowKey = Animator.StringToHash("throw");
 
         [SerializeField] private TMP_Text goldText;
+        [SerializeField] private TMP_Text swordText;
         [SerializeField] private ParticleSystem hitParticles;
         [SerializeField] private AnimatorController armed;
         [SerializeField] private AnimatorController unarmed;
         [SerializeField] private Cooldown throwCooldown;
+        [SerializeField] private int maxSwords;
         
         [SerializeField] private CheckCircleOverlap interactionCheck;
         private bool canDoubleJump;
@@ -31,6 +33,14 @@ namespace Creatures
         {
             session.Data.coins += amount;
             goldText.text = session.Data.coins.ToString();
+        }
+        
+        public bool TryCollectSword(int amount)
+        {
+            if(session.Data.swords >= maxSwords) return false;
+            session.Data.swords = Mathf.Min(session.Data.swords + amount, maxSwords);
+            swordText.text = session.Data.swords.ToString();
+            return true;
         }
 
         protected override void Awake()
@@ -121,6 +131,7 @@ namespace Creatures
 
         public void ArmHero()
         {
+            if (session.Data.isArmed) return;
             session.Data.isArmed = true;
             UpdateHeroWeapon();
         }
@@ -138,9 +149,13 @@ namespace Creatures
 
         public void Throw()
         {
-            if (throwCooldown.IsReady)
+            if (throwCooldown.IsReady && session.Data.isArmed && session.Data.swords > 1)
             {
                 Animator.SetTrigger(ThrowKey);
+                
+                session.Data.swords -= 1;
+                swordText.text = session.Data.swords.ToString();
+                
                 throwCooldown.Reset();
             }
         }
