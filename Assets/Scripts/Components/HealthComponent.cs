@@ -40,6 +40,7 @@ namespace Components
         public void TakeDamage(int damage)
         {
             if(!canTakeDamage) return;
+            if(CurrentHealth <= 0) return;
             CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
             onChange?.Invoke(CurrentHealth);
             onTakeDamage?.Invoke();

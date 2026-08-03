@@ -12,6 +12,7 @@ namespace Creatures
         [SerializeField] private float alarmDelay = 0.5f;
         [SerializeField] private float attackCooldown = 1f;
         [SerializeField] private float missCooldown = 0.5f;
+        [SerializeField] private float deathCooldown = 2f;
 
         private Coroutine current;
         private GameObject target;
@@ -20,6 +21,7 @@ namespace Creatures
         private Creature creature;
         private Animator animator;
         private Patrol patrol;
+        private Collider2D col;
         
         private bool isDead;
 
@@ -32,6 +34,7 @@ namespace Creatures
             creature =  GetComponent<Creature>();
             animator = GetComponent<Animator>();
             patrol = GetComponent<Patrol>();
+            col = GetComponent<Collider2D>();
             
         }
 
@@ -105,14 +108,21 @@ namespace Creatures
             current = StartCoroutine(coroutine);
         }
 
+        private IEnumerator DestroyObject()
+        {
+            yield return new WaitForSeconds(deathCooldown);
+            Destroy(gameObject);
+        }
         public void OnDie()
         {
             isDead = true;
             animator.SetBool(Dead, true);
-            creature.SetDirection(Vector2.zero);
             
-            if(current != null)
-                StopCoroutine(current);
+            var offset = col.offset;
+            offset.y = 0;
+            col.offset = offset;
+            
+            StartState(DestroyObject());
         }
     }
 }
