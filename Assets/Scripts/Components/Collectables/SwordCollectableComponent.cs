@@ -1,4 +1,5 @@
 ﻿using Creatures;
+using Creatures.Character;
 using UnityEngine;
 
 namespace Components.Collectables

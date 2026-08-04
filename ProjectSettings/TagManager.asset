@@ -7,6 +7,7 @@ TagManager:
   - MovingPlatform
   - Enemy
   - Interactable
+  - Trash
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - MovingPlatform
   - Trash
   - Hero
-  - 
-  - 
+  - Enemies
+  - Background
   - 
   - 
   - 

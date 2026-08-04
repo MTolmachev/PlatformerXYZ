@@ -1,4 +1,6 @@
 ﻿using Components;
+using Components.ColliderBased;
+using Components.GOBased;
 using UnityEngine;
 
 namespace Creatures

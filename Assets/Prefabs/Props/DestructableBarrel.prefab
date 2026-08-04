@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 735425661566698730}
   - component: {fileID: 735425661566698731}
   - component: {fileID: 6259467765868006985}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DestructableBarrel
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -221,8 +221,12 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
+  onChange:
+    m_PersistentCalls:
+      m_Calls: []
   healthText: {fileID: 0}
   canTakeDamage: 1
+  immunityDuration: 1
 --- !u!50 &735425661566698730
 Rigidbody2D:
   serializedVersion: 4
@@ -274,3 +278,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 735425661566698741}
   prefab: {fileID: 227584269867778162, guid: 6b789af5938c59543ac3936c4c84faf3, type: 3}
+  inParent: 0
