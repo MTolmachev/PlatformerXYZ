@@ -36,7 +36,6 @@ namespace Components.Health
             maxHealth = hp;
             ShowHealth();
         }
-        
         public void TakeDamage(int damage)
         {
             if(!canTakeDamage) return;
@@ -62,7 +61,7 @@ namespace Components.Health
         private void ShowHealth()
         {
             if(!healthText) return; 
-            healthText.text = $"Health: {CurrentHealth.ToString()} / {maxHealth.ToString()}";
+            healthText.text = $"Health: {CurrentHealth.ToString()} | {maxHealth.ToString()}";
         }
         public void SetHealth(int dataHp)
         {

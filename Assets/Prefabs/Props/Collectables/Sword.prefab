@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 7013872851304910072}
   - component: {fileID: 7013872851304910055}
   - component: {fileID: 7013872851304910054}
-  - component: {fileID: 7013872851304910053}
   - component: {fileID: 7013872851304910075}
-  - component: {fileID: 7456857353877289170}
+  - component: {fileID: 849838100}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -147,12 +146,12 @@ MonoBehaviour:
   tag: Player
   layer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32567
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7456857353877289170}
-        m_MethodName: Collect
+      - m_Target: {fileID: 849838100}
+        m_MethodName: Add
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -162,29 +161,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7013872851304910053}
-        m_MethodName: ArmHero
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &7013872851304910053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013872851304910052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321ece5fa31b463b9ff0783fd189028e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7013872851304910075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableObject: {fileID: 7013872851304910052}
---- !u!114 &7456857353877289170
+--- !u!114 &849838100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,10 +183,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7013872851304910052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc4847b552e4128b8f6d24780ef6a6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a4ea1a99704a1c9207a6333e06aeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onCollected:
+  id: Sword
+  amount: 1
+  onSuccess:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7013872851304910075}
@@ -224,4 +202,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  amount: 1

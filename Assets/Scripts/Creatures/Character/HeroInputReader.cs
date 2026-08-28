@@ -43,5 +43,13 @@ namespace Creatures.Character
             hero.Throw();
          }
       }
+
+      public void OnUsePotion(InputAction.CallbackContext context)
+      {
+         if (context.performed)
+         {
+            hero.UsePotion();
+         }
+      }
    }
 }

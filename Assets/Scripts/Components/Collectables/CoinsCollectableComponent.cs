@@ -16,11 +16,5 @@ namespace Components.Collectables
             hero.CollectGold(amount);
             return true;
         }
-
-        private enum CoinsType
-        {
-            Silver,
-            Gold
-        }
     }
 }

@@ -1,0 +1,9 @@
+OVDF v1.1
+Creatures.Character.Hero, Assembly-CSharp
+MetaGuid:839f81dd63661534da22059910fe2efb
+
+# interactionCheck
+Position: $root:6
+
+# maxSwords
+Position: $root:23
