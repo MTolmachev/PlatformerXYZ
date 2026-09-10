@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingPlatform
   - Enemy
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Interactables
   - MovingPlatform
   - Trash
-  - 
+  - Hero
   - 
   - 
   - 
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Creatures
     uniqueID: 4103315511
+    locked: 0
+  - name: TileMap
+    uniqueID: 1699206111
     locked: 0

@@ -55,14 +55,14 @@ public class SpriteAnimation : MonoBehaviour
 
     private void StartAnimation()
     {
-        nextFrameTime = Time.time + secondsPerFrame;
+        nextFrameTime = Time.time;
         enabled = isPlaying = true;
         currentFrame = 0;
     }
 
     private void OnEnable()
     {
-        nextFrameTime = Time.time + secondsPerFrame;
+        nextFrameTime = Time.time;
     }
 
     private void Update()

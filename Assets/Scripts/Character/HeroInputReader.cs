@@ -1,4 +1,5 @@
 ﻿using System;
+using Creatures;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -22,20 +23,28 @@ namespace Character
 
       public void OnJump(InputAction.CallbackContext context)
       {
-         if (context.started) 
+         if (context.performed) 
             hero.Jump();
       }
 
       public void OnInteract(InputAction.CallbackContext context)
       {
-         if (context.started)
+         if (context.performed)
             hero.Interact();
       }
 
-      public void OnAttack(InputAction.CallbackContext context)
+      public void OnAttackInput(InputAction.CallbackContext context)
       {
-         if (context.started)
+         if (context.performed)
             hero.Attack();
+      }
+      
+      public void OnThrow(InputAction.CallbackContext context)
+      {
+         if (context.performed)
+         {
+            hero.Throw();
+         }
       }
    }
 }

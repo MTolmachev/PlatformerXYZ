@@ -1,5 +1,4 @@
 ﻿using System;
-using Character;
 using UnityEngine;
 
 namespace Components
@@ -11,7 +10,7 @@ namespace Components
 
         public void ApplyHealthChange(GameObject target)
         {
-            var healthComponent = target.GetComponent<HealthComponent>();
+            var healthComponent = target.GetComponentInParent<HealthComponent>();
             if (healthComponent == null) return;
             switch (type)
             {
@@ -19,9 +18,7 @@ namespace Components
                     healthComponent.TakeDamage(amount);
                     break;
                 case ChangeHealthType.Heal:
-                    if(healthComponent.CurrentHealth == healthComponent.GetMaxHealth()) break;
-                    healthComponent.TakeHeal(amount);
-                    Destroy(gameObject);
+                    healthComponent.TryHeal(amount);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

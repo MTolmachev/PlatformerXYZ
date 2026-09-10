@@ -1,5 +1,5 @@
 ﻿using System;
-using Model;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,46 +16,47 @@ namespace Components
         [SerializeField] private TMP_Text healthText;
 
         [SerializeField] private bool canTakeDamage = true;
+        [SerializeField] private float immunityDuration = 1f;
         
-        private GameSession session;
         
         public int CurrentHealth { get; private set; }
+
+        private void Awake()
+        {
+            CurrentHealth = maxHealth;
+        }
 
         public int GetMaxHealth()
         {
             return maxHealth;
         }
-
-        private void Start()
+        
+        public void SetMaxHealth(int hp)
         {
-            session = FindObjectOfType<GameSession>();
-            CurrentHealth = session.Data.hp;
-            ShowHealth();
-
-        }
-
-        private void Update()
-        {
+            maxHealth = hp;
             ShowHealth();
         }
         
         public void TakeDamage(int damage)
         {
             if(!canTakeDamage) return;
-            CurrentHealth -= damage;
+            if(CurrentHealth <= 0) return;
+            CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
             onChange?.Invoke(CurrentHealth);
             onTakeDamage?.Invoke();
             if (CurrentHealth <= 0)
                 onDie?.Invoke();
+            ShowHealth();
+            if (!gameObject) return;
+            StartCoroutine(DamageImmunity(immunityDuration));
         }
 
         public void TakeHeal(int heal)
         {
-            CurrentHealth += heal;
+            CurrentHealth = Mathf.Min(CurrentHealth + heal, maxHealth);;
             onChange?.Invoke(CurrentHealth);
             onTakeHeal?.Invoke();
-            if (CurrentHealth > maxHealth)
-                CurrentHealth = maxHealth;
+            ShowHealth();
         }
 
         private void ShowHealth()
@@ -66,12 +67,33 @@ namespace Components
         public void SetHealth(int dataHp)
         {
             CurrentHealth = dataHp;
+            ShowHealth();
+        }
+
+        private IEnumerator DamageImmunity(float duration)
+        {
+            canTakeDamage = false;
+            yield return new WaitForSeconds(duration);
+            canTakeDamage = true;
         }
         
         [Serializable]
         public class HealthChangeEvent : UnityEvent<int>
         {
             
+        }
+
+        public bool TryHeal(int amount)
+        {
+            if(amount <= 0) return false;
+            if(CurrentHealth >= maxHealth) return false;
+            CurrentHealth = Mathf.Min(CurrentHealth + amount, maxHealth);
+            
+            onChange?.Invoke(CurrentHealth);
+            onTakeHeal?.Invoke();
+            ShowHealth();
+            
+            return true;
         }
     }
 }

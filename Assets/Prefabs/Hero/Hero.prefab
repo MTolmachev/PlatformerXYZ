@@ -1,5 +1,127 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &695607659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 695607660}
+  - component: {fileID: 695607661}
+  - component: {fileID: 976267389163693304}
+  m_Layer: 12
+  m_Name: InteractionRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &695607660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695607659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.334, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7509153539458339611}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &695607661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695607659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d104d7ead8364cb09356db51ee780835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.6
+  layer:
+    serializedVersion: 2
+    m_Bits: 512
+  tags:
+  - Interactable
+  onOverlap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 976267389163693304}
+        m_MethodName: DoInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &976267389163693304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695607659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6146bdea9b443158fcec225f6911cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6759352339287396474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168142849757999161}
+  - component: {fileID: 4783502177474415700}
+  m_Layer: 0
+  m_Name: ThrowSwordSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168142849757999161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759352339287396474}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.364, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7509153539458339611}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4783502177474415700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759352339287396474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337c88a63f97428ea07946555826dd03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 168142849757999161}
+  prefab: {fileID: 4355992580951806571, guid: 9a2e41508a8e5e246a9c58ce9d665caa, type: 3}
+  inParent: 0
 --- !u!1 &7509153538399785230
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7509153538399785231}
   - component: {fileID: 7509153538399785228}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FootStepPosition
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -45,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7509153538399785231}
   prefab: {fileID: 3488242611586149910, guid: a58c8ea87ba5ae849b21d2335ad95cd8, type: 3}
+  inParent: 0
 --- !u!1 &7509153539215971085
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7509153539215971082}
   - component: {fileID: 7509153539215971083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: JumpParticlesPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7509153539215971082}
   prefab: {fileID: 4355992580951806571, guid: 2f4a4bfadf6c6e644b1e13feb7879f8f, type: 3}
+  inParent: 0
 --- !u!1 &7509153539260648914
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,8 +225,8 @@ GameObject:
   - component: {fileID: 7509153539260648915}
   - component: {fileID: 7509153539260648913}
   - component: {fileID: 7509153539260648912}
-  m_Layer: 0
-  m_Name: LayerCheck
+  m_Layer: 12
+  m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,10 +274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9f194e5723ed645bb869b535531a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
+  layer:
     serializedVersion: 2
     m_Bits: 256
-  isTouchingGround: 0
+  isTouchingLayer: 0
 --- !u!1 &7509153539377261221
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,8 +288,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7509153539377261218}
   - component: {fileID: 7509153539377261219}
-  m_Layer: 0
-  m_Name: AttackPosition
+  - component: {fileID: 1574814831}
+  m_Layer: 12
+  m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -197,7 +322,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d104d7ead8364cb09356db51ee780835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.2
+  radius: 0.4
+  layer:
+    serializedVersion: 2
+    m_Bits: 3895
+  tags:
+  - Enemy
+  onOverlap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1574814831}
+        m_MethodName: ApplyHealthChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1574814831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539377261221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f08a53d576c6246b3d62f5cd45286f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 1
+  type: 0
 --- !u!1 &7509153539458339612
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +374,8 @@ GameObject:
   - component: {fileID: 7509153539458339609}
   - component: {fileID: 7509153539458339684}
   - component: {fileID: 7509153539458339682}
-  m_Layer: 0
+  - component: {fileID: 4795297894837000746}
+  m_Layer: 12
   m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -239,6 +398,8 @@ Transform:
   - {fileID: 7509153538399785231}
   - {fileID: 7509153539215971082}
   - {fileID: 7509153539377261218}
+  - {fileID: 695607660}
+  - {fileID: 168142849757999161}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,22 +477,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839f81dd63661534da22059910fe2efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertScale: 0
   speed: 3
   jumpForce: 10
   damageJumpForce: 5
-  damage: 1
   layerCheck: {fileID: 7509153539260648912}
+  attackRange: {fileID: 7509153539377261219}
+  particles: {fileID: 4795297894837000746}
   goldText: {fileID: 0}
-  interactionRadius: 1
-  interactionLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  footStepPerticles: {fileID: 7509153538399785228}
-  jumpAirPerticles: {fileID: 7509153539215971083}
   hitParticles: {fileID: 7509153539919358539}
   armed: {fileID: 9100000, guid: d315b6bc792c17a49aacaf776d2729d3, type: 2}
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
-  attackRange: {fileID: 7509153539377261219}
+  throwCooldown:
+    value: 1
+  interactionCheck: {fileID: 695607661}
 --- !u!114 &7509153539458339685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +551,7 @@ MonoBehaviour:
         m_CallState: 2
   healthText: {fileID: 0}
   canTakeDamage: 1
+  immunityDuration: 1
 --- !u!70 &7509153539458339687
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -503,7 +663,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7509153539458339613}
-        m_MethodName: OnAttack
+        m_MethodName: OnAttackInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -515,6 +675,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4ce4e1dd-9b19-4744-a0cf-dadbe936df23
     m_ActionName: Hero/Attack[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7509153539458339613}
+        m_MethodName: OnThrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 278450af-1f6f-437a-b62b-0811e13ababc
+    m_ActionName: Hero/Throw[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
@@ -530,7 +705,7 @@ Animator:
   m_GameObject: {fileID: 7509153539458339612}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
+  m_Controller: {fileID: 9100000, guid: d315b6bc792c17a49aacaf776d2729d3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -551,6 +726,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6588c60f50d417893617bd4dbe96b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4795297894837000746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539458339612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4a6c9e74094c3d883ec93e74719e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - id: Run
+    component: {fileID: 7509153538399785228}
+  - id: Jump
+    component: {fileID: 7509153539215971083}
+  - id: Throw
+    component: {fileID: 4783502177474415700}
 --- !u!1 &7509153539919358540
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +756,7 @@ GameObject:
   - component: {fileID: 7509153539919358541}
   - component: {fileID: 7509153539919358539}
   - component: {fileID: 7509153539919358538}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
