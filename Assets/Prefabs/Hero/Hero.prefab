@@ -325,7 +325,7 @@ MonoBehaviour:
   radius: 0.4
   layer:
     serializedVersion: 2
-    m_Bits: 3895
+    m_Bits: 8192
   tags:
   - Enemy
   onOverlap:
@@ -365,10 +365,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7509153539458339611}
-  - component: {fileID: 7509153539458339610}
-  - component: {fileID: 7509153539458339613}
   - component: {fileID: 7509153539458339608}
   - component: {fileID: 7509153539458339685}
+  - component: {fileID: 7509153539458339613}
+  - component: {fileID: 7509153539458339610}
   - component: {fileID: 7509153539458339687}
   - component: {fileID: 7509153539458339686}
   - component: {fileID: 7509153539458339609}
@@ -403,68 +403,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7509153539458339610
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7509153539458339612}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -191651785
-  m_SortingLayer: 5
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a75885b258905bc4eb5092bd7f0827c6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 2, y: 1.25}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!114 &7509153539458339613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7509153539458339612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb69ad92b61f3442a330d10fd8a039d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7509153539458339608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,13 +422,16 @@ MonoBehaviour:
   layerCheck: {fileID: 7509153539260648912}
   attackRange: {fileID: 7509153539377261219}
   particles: {fileID: 4795297894837000746}
-  goldText: {fileID: 0}
   hitParticles: {fileID: 7509153539919358539}
+  interactionCheck: {fileID: 695607661}
+  goldText: {fileID: 0}
+  swordText: {fileID: 0}
+  healPotionText: {fileID: 0}
   armed: {fileID: 9100000, guid: d315b6bc792c17a49aacaf776d2729d3, type: 2}
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:
     value: 1
-  interactionCheck: {fileID: 695607661}
+  maxSwords: 5
 --- !u!114 &7509153539458339685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +493,68 @@ MonoBehaviour:
   healthText: {fileID: 0}
   canTakeDamage: 1
   immunityDuration: 1
+--- !u!114 &7509153539458339613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539458339612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb69ad92b61f3442a330d10fd8a039d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &7509153539458339610
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539458339612}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -191651785
+  m_SortingLayer: 5
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: a75885b258905bc4eb5092bd7f0827c6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 1.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!70 &7509153539458339687
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -690,6 +693,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 278450af-1f6f-437a-b62b-0811e13ababc
     m_ActionName: Hero/Throw[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7509153539458339613}
+        m_MethodName: OnUsePotion
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f760b98a-2c1b-4927-8014-899139356205
+    m_ActionName: Hero/UsePotion[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero

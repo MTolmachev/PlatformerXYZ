@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Components.Health;
+using UnityEngine;
 namespace Components.Collectables
 {
     public class HealthPotionCollectableComponent : CollectObjectComponent

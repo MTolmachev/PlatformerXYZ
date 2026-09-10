@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 7135816874433821687}
   - component: {fileID: 6375004382996831863}
   - component: {fileID: 237153987}
-  - component: {fileID: 96411147802259101}
   - component: {fileID: 3336122608858458904}
   - component: {fileID: 412719392187504512}
   - component: {fileID: 1241702912546003070}
-  - component: {fileID: 5169542279765962321}
+  - component: {fileID: 1739181272}
   m_Layer: 0
   m_Name: HealPot
   m_TagString: Untagged
@@ -116,20 +115,6 @@ MonoBehaviour:
     onComplete:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &96411147802259101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8952948847994094135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f08a53d576c6246b3d62f5cd45286f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: 1
-  type: 1
 --- !u!58 &3336122608858458904
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -161,12 +146,12 @@ MonoBehaviour:
   tag: Player
   layer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4096
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5169542279765962321}
-        m_MethodName: Collect
+      - m_Target: {fileID: 1739181272}
+        m_MethodName: Add
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -189,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableObject: {fileID: 8952948847994094135}
---- !u!114 &5169542279765962321
+--- !u!114 &1739181272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,12 +183,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 8952948847994094135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec1b79a4b1214e20b7f16e069dcc4df7, type: 3}
+  m_Script: {fileID: 11500000, guid: 72a4ea1a99704a1c9207a6333e06aeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onCollected:
+  id: HealPotion
+  amount: 1
+  onSuccess:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3336122608858458904}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1241702912546003070}
         m_MethodName: DestroyObject
         m_Mode: 1
@@ -215,4 +213,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  amount: 1

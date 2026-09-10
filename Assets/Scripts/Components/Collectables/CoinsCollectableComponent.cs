@@ -1,4 +1,5 @@
 ﻿using Creatures;
+using Creatures.Character;
 using UnityEngine;
 
 namespace Components.Collectables
@@ -14,12 +15,6 @@ namespace Components.Collectables
                 return false;
             hero.CollectGold(amount);
             return true;
-        }
-
-        private enum CoinsType
-        {
-            Silver,
-            Gold
         }
     }
 }

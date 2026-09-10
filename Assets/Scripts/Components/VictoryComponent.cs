@@ -1,5 +1,5 @@
-﻿using Character;
-using Creatures;
+﻿using Creatures;
+using Creatures.Character;
 using UnityEngine;
 using TMPro;
 
