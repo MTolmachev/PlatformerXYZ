@@ -1,4 +1,5 @@
 ﻿using Components;
+using Components.Audio;
 using Components.ColliderBased;
 using Components.GOBased;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace Creatures
         private Vector2 direction;
         protected Rigidbody2D Rb;
         protected Animator Animator;
+        protected PlaySoundsComponent Sounds;
 
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
@@ -36,6 +38,7 @@ namespace Creatures
         {
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>(); 
+            Sounds = GetComponent<PlaySoundsComponent>();
         }
         
         public void SetDirection(Vector2 dir)
@@ -78,6 +81,7 @@ namespace Creatures
         public virtual void Attack()
         {
             Animator.SetTrigger(Attacking);
+            Sounds.Play("Melee");
         }
         
         public void OnAttack()

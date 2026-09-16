@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  invertX: 0
 --- !u!114 &8262832211525271744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +240,7 @@ MonoBehaviour:
   tag: Enemy
   layer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32567
   action:
     m_PersistentCalls:
       m_Calls:

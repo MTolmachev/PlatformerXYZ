@@ -165,6 +165,7 @@ namespace Creatures.Character
         
         public void SpawnJumpAir()
         {
+            Sounds.Play("Jump");
             particles.Spawn("Jump");
         }
 
@@ -200,6 +201,7 @@ namespace Creatures.Character
 
         public void OnDoThrow()
         {
+            Sounds.Play("Range");
             particles.Spawn("Throw");
             isLastSwordThrowing = false;
             UpdateHeroWeapon();
