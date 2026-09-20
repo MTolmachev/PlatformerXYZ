@@ -22,6 +22,7 @@ namespace Creatures.Character
         [SerializeField] private TMP_Text swordText;
         [SerializeField] private TMP_Text healPotionText;
         [SerializeField] private TMP_Text weightText;
+        [SerializeField] private TMP_Text hintText;
         
         [Header("Animation")]
         [SerializeField] private AnimatorController armed;
@@ -56,6 +57,11 @@ namespace Creatures.Character
             ShowWeight();
         }
 
+        private void Update()
+        {
+            ShowHint();
+        }
+
         private void OnDestroy()
         {
             session.Data.Inventory.OnChanged -= OnInventoryChanged;
@@ -73,7 +79,6 @@ namespace Creatures.Character
             goldText.text = CoinsCount.ToString();
             swordText.text = SwordCount.ToString();
             healPotionText.text = HealPotionCount.ToString();
-            ShowWeight();
         }
         
 
@@ -89,7 +94,7 @@ namespace Creatures.Character
             if (id == "Sword" && SwordCount + value > maxSwords) return false;
             
             session.Data.Inventory.Add(id, value);
-            
+            ShowHint();
             return true;
         }
         
@@ -120,9 +125,8 @@ namespace Creatures.Character
         public void OnHealthChanged(int health)
         {
             session.Data.hp = health;
+            ShowHint();
         }
-
-        
 
         public void Jump()
         {
@@ -228,6 +232,19 @@ namespace Creatures.Character
             if (itemsCount <= 0) return;
             session.Data.Inventory.Remove("HealPotion", 1);
             healthComponent.TryHeal(1);
+        }
+
+        private void ShowHint()
+        {
+            if (session.Data.Inventory.Count("HealPotion") > 0 &&
+                healthComponent.CurrentHealth < healthComponent.GetMaxHealth())
+            {
+                hintText.gameObject.SetActive(true);
+            }
+            else
+            {
+                hintText.gameObject.SetActive(false);
+            }
         }
     }
 }

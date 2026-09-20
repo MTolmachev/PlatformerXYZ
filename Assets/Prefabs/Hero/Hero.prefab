@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1503252022}
   - component: {fileID: 1503252021}
   m_Layer: 12
-  m_Name: Sounds
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,8 @@ AudioSource:
   m_GameObject: {fileID: 1503252019}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 4c87f027b64c26f4c883920289ef2229,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -252,11 +253,12 @@ AudioSource:
   m_GameObject: {fileID: 3446534034278484106}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: bb5b1341f00565a4f8762f21956d89c6,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0376b166205ddb54296cc5e232cd402d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -694,6 +696,7 @@ MonoBehaviour:
   swordText: {fileID: 0}
   healPotionText: {fileID: 0}
   weightText: {fileID: 0}
+  hintText: {fileID: 0}
   armed: {fileID: 9100000, guid: d315b6bc792c17a49aacaf776d2729d3, type: 2}
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:

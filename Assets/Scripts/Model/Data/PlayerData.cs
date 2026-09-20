@@ -16,14 +16,8 @@ namespace Model.Data
 
         public PlayerData Clone()
         {
-            return new PlayerData
-            {
-                maxHp = this.maxHp,
-                hp = this.hp,
-            };
-
-            //var json = JsonUtility.ToJson(this);
-            //return JsonUtility.FromJson<PlayerData>(json);
+            var json = JsonUtility.ToJson(this);
+            return JsonUtility.FromJson<PlayerData>(json);
         }
     }
 }
