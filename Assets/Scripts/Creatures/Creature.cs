@@ -24,6 +24,7 @@ namespace Creatures
         [SerializeField] protected SpawnListComponent particles;
 
         private Vector2 direction;
+        private float speedMultiplier = 1f;
         protected Rigidbody2D Rb;
         protected Animator Animator;
         protected PlaySoundsComponent Sounds;
@@ -45,6 +46,11 @@ namespace Creatures
         {
             this.direction = dir;
         }
+
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            speedMultiplier = Mathf.Max(0f, multiplier);
+        }
         
         protected bool IsGrounded()
         {
@@ -53,7 +59,7 @@ namespace Creatures
         
         private void FixedUpdate()
         {
-            Rb.velocity = new Vector2(direction.x * speed, Rb.velocity.y);
+            Rb.velocity = new Vector2(direction.x * speed * speedMultiplier, Rb.velocity.y);
 
             UpdateSpriteDirection(direction);
             
