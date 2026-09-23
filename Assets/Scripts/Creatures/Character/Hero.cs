@@ -1,4 +1,5 @@
 ﻿using System;
+using Components;
 using Components.ColliderBased;
 using Components.Health;
 using Model;
@@ -17,12 +18,6 @@ namespace Creatures.Character
 
         [SerializeField] private ParticleSystem hitParticles;
         [SerializeField] private CheckCircleOverlap interactionCheck;
-        [Header("Texts")]
-        [SerializeField] private TMP_Text goldText;
-        [SerializeField] private TMP_Text swordText;
-        [SerializeField] private TMP_Text healPotionText;
-        [SerializeField] private TMP_Text weightText;
-        [SerializeField] private TMP_Text hintText;
         
         [Header("Animation")]
         [SerializeField] private AnimatorController armed;
@@ -52,14 +47,7 @@ namespace Creatures.Character
             healthComponent = GetComponent<HealthComponent>();
             healthComponent.SetHealth(session.Data.hp);
             healthComponent.SetMaxHealth(session.Data.maxHp);
-            UpdateInventoryUI();
             UpdateHeroWeapon();
-            ShowWeight();
-        }
-
-        private void Update()
-        {
-            ShowHint();
         }
 
         private void OnDestroy()
@@ -69,16 +57,8 @@ namespace Creatures.Character
 
         private void OnInventoryChanged(string id, int value)
         {
-            UpdateInventoryUI();
             if(id == "Sword")
                 UpdateHeroWeapon();
-        }
-
-        private void UpdateInventoryUI()
-        {
-            goldText.text = CoinsCount.ToString();
-            swordText.text = SwordCount.ToString();
-            healPotionText.text = HealPotionCount.ToString();
         }
         
 
@@ -94,14 +74,7 @@ namespace Creatures.Character
             if (id == "Sword" && SwordCount + value > maxSwords) return false;
             
             session.Data.Inventory.Add(id, value);
-            ShowHint();
             return true;
-        }
-        
-        private void ShowWeight()
-        {
-            if(!weightText) return; 
-            weightText.text = $"Weight: {session.Data.Inventory.WeightCount()} | {maxWeight.ToString()}";
         }
 
         public int GetCoinsValue()
@@ -125,7 +98,6 @@ namespace Creatures.Character
         public void OnHealthChanged(int health)
         {
             session.Data.hp = health;
-            ShowHint();
         }
 
         public void Jump()
@@ -234,17 +206,9 @@ namespace Creatures.Character
             healthComponent.TryHeal(1);
         }
 
-        private void ShowHint()
+        public void MakePause()
         {
-            if (session.Data.Inventory.Count("HealPotion") > 0 &&
-                healthComponent.CurrentHealth < healthComponent.GetMaxHealth())
-            {
-                hintText.gameObject.SetActive(true);
-            }
-            else
-            {
-                hintText.gameObject.SetActive(false);
-            }
+            PauseComponent.Pause();
         }
     }
 }

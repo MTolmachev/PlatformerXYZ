@@ -9,10 +9,10 @@ namespace UI
         private static readonly int Hide = Animator.StringToHash("Hide");
         private Animator animator;
 
-        private void Start()
+        protected virtual void Start()
         {
             animator = GetComponent<Animator>();
-            
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             animator.SetTrigger(Show);
         }
 

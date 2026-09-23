@@ -692,11 +692,6 @@ MonoBehaviour:
   particles: {fileID: 4795297894837000746}
   hitParticles: {fileID: 7509153539919358539}
   interactionCheck: {fileID: 695607661}
-  goldText: {fileID: 0}
-  swordText: {fileID: 0}
-  healPotionText: {fileID: 0}
-  weightText: {fileID: 0}
-  hintText: {fileID: 0}
   armed: {fileID: 9100000, guid: d315b6bc792c17a49aacaf776d2729d3, type: 2}
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:
@@ -990,6 +985,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f760b98a-2c1b-4927-8014-899139356205
     m_ActionName: Hero/UsePotion[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7509153539458339613}
+        m_MethodName: OnMakePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e347014a-e68d-4235-8962-f599129c75b8
+    m_ActionName: Hero/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero

@@ -51,5 +51,13 @@ namespace Creatures.Character
             hero.UsePotion();
          }
       }
+      
+      public void OnMakePause(InputAction.CallbackContext context)
+      {
+         if (context.performed)
+         {
+            hero.MakePause();
+         }
+      }
    }
 }
