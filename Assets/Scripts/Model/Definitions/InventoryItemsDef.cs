@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Model.Definitions
 {
-    [CreateAssetMenu(menuName = "Defs/InventoryItems", fileName = "InventoryDef")]
+    [CreateAssetMenu(menuName = "Defs/InventoryItems", fileName = "InventoryItems")]
     public class InventoryItemsDef : ScriptableObject
     {
         [SerializeField] private ItemDef[] items;
@@ -28,11 +27,13 @@ namespace Model.Definitions
     public struct ItemDef
     {
         [SerializeField] private string id;
-        [SerializeField] private float weight;
+        [SerializeField] private bool isStackable;
+        [SerializeField] private Sprite icon;
         
         public string Id => id;
-        public float Weight => weight;
+        public bool IsStackable => isStackable;
         
         public bool IsVoid => string.IsNullOrEmpty(id);
+        public Sprite Icon => icon;
     }
 }

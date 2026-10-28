@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - id: Coin
-    weight: 0
+    isStackable: 1
   - id: Sword
-    weight: 5
+    isStackable: 1
   - id: Key
-    weight: 1
-  - id: HealPotion
-    weight: 1
+    isStackable: 0
+  - id: HealthPotion
+    isStackable: 0

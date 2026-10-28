@@ -469,8 +469,6 @@ MonoBehaviour:
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:
     value: 1
-  maxSwords: 5
-  maxWeight: 20
 --- !u!114 &7509153539458339685
 MonoBehaviour:
   m_ObjectHideFlags: 0

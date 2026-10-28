@@ -2,11 +2,13 @@
 
 namespace Model.Definitions
 {
-    [CreateAssetMenu(fileName = "Defs/PlayerDef", menuName = "PlayerDef", order = 0)]
+    [CreateAssetMenu(menuName = "Defs/PlayerDef", fileName = "PlayerDef")]
     public class PlayerDef : ScriptableObject
     {
+        [SerializeField] private int inventorySize;
         [SerializeField] private int maxHealth;
-        
+
+        public int InventorySize => inventorySize;
         public int MaxHealth => maxHealth;
     }
 }

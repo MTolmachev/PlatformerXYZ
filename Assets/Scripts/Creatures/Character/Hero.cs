@@ -12,7 +12,7 @@ using Utils;
 
 namespace Creatures.Character
 {
-    public class Hero : Creature
+    public class Hero : Creature, ICanAddInInventory
     {
         private static readonly int ThrowKey = Animator.StringToHash("throw");
 
@@ -25,10 +25,6 @@ namespace Creatures.Character
         
         [Header("Swords")]
         [SerializeField] private Cooldown throwCooldown;
-        [SerializeField] private int maxSwords;
-        
-        [Header("Inventory")]
-        [SerializeField] private int maxWeight;
         
         private bool canDoubleJump;
         private bool isLastSwordThrowing;
@@ -38,7 +34,6 @@ namespace Creatures.Character
         
         private int SwordCount => session.Data.Inventory.Count("Sword");
         private int CoinsCount => session.Data.Inventory.Count("Coin");
-        private int HealPotionCount => session.Data.Inventory.Count("HealPotion");
         
         private void Start()
         {
@@ -65,19 +60,9 @@ namespace Creatures.Character
         }
         
 
-        public bool AddInInventory(string id, int value)
+        public void AddInInventory(string id, int value)
         {
-            var itemDef = DefsFacade.I.Items.Get(id);
-            if(itemDef.IsVoid) return false;
-            
-            var itemWeight = itemDef.Weight * value;
-            var weight = session.Data.Inventory.WeightCount();
-            
-            if(weight + itemWeight > maxWeight) return false;
-            if (id == "Sword" && SwordCount + value > maxSwords) return false;
-            
             session.Data.Inventory.Add(id, value);
-            return true;
         }
 
         public int GetCoinsValue()
@@ -88,14 +73,6 @@ namespace Creatures.Character
         public void CollectGold(int amount)
         {
             session.Data.Inventory.Add("Coin", amount);
-        }
-        
-        public bool TryCollectSword(int amount)
-        {
-            if (SwordCount + amount > maxSwords) return false;
-            session.Data.Inventory.Add("Sword", amount);
-            
-            return true;
         }
         
         public void OnHealthChanged(int health)
@@ -203,10 +180,10 @@ namespace Creatures.Character
 
         public void UsePotion()
         {
-            var itemsCount = session.Data.Inventory.Count("HealPotion");
+            var itemsCount = session.Data.Inventory.Count("HealthPotion");
             if (itemsCount <= 0) return;
-            session.Data.Inventory.Remove("HealPotion", 1);
-            healthComponent.TryHeal(1);
+            healthComponent.TakeHeal(5);
+            session.Data.Inventory.Remove("HealthPotion", 1);
         }
 
         public void MakePause()
