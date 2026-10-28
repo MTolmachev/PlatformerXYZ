@@ -33,8 +33,8 @@ namespace Components.Health
         
         public void SetMaxHealth(int hp)
         {
-            maxHealth = hp;
-            ShowHealth();
+            maxHealth = Mathf.Max(1, hp);
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, maxHealth);
         }
         public void TakeDamage(int damage)
         {
@@ -45,7 +45,6 @@ namespace Components.Health
             onTakeDamage?.Invoke();
             if (CurrentHealth <= 0)
                 onDie?.Invoke();
-            ShowHealth();
             if (!gameObject) return;
             StartCoroutine(DamageImmunity(immunityDuration));
         }
@@ -55,18 +54,11 @@ namespace Components.Health
             CurrentHealth = Mathf.Min(CurrentHealth + heal, maxHealth);;
             onChange?.Invoke(CurrentHealth);
             onTakeHeal?.Invoke();
-            ShowHealth();
         }
-
-        private void ShowHealth()
-        {
-            if(!healthText) return; 
-            healthText.text = $"Health: {CurrentHealth.ToString()} | {maxHealth.ToString()}";
-        }
+        
         public void SetHealth(int dataHp)
         {
-            CurrentHealth = dataHp;
-            ShowHealth();
+            CurrentHealth = Mathf.Clamp(dataHp, 0, maxHealth);
         }
 
         private IEnumerator DamageImmunity(float duration)
@@ -90,7 +82,6 @@ namespace Components.Health
             
             onChange?.Invoke(CurrentHealth);
             onTakeHeal?.Invoke();
-            ShowHealth();
             
             return true;
         }

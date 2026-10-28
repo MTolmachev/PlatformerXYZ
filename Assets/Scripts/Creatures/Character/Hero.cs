@@ -42,11 +42,14 @@ namespace Creatures.Character
         
         private void Start()
         {
+            var maxHealth = DefsFacade.I.Player.MaxHealth;
+            
             session = FindObjectOfType<GameSession>();
             session.Data.Inventory.OnChanged += OnInventoryChanged;
             healthComponent = GetComponent<HealthComponent>();
-            healthComponent.SetHealth(session.Data.hp);
-            healthComponent.SetMaxHealth(session.Data.maxHp);
+            healthComponent.SetMaxHealth(maxHealth);
+            healthComponent.SetHealth(session.Data.Hp.Value);
+            
             UpdateHeroWeapon();
         }
 
@@ -97,7 +100,7 @@ namespace Creatures.Character
         
         public void OnHealthChanged(int health)
         {
-            session.Data.hp = health;
+            session.Data.Hp.Value = health;
         }
 
         public void Jump()

@@ -15,6 +15,7 @@ namespace Model
 
         private void Awake()
         {
+            LoadHud();
             if (IsSessionExist())
             {
                 Destroy(gameObject);
@@ -24,6 +25,11 @@ namespace Model
             savedData = playerData.Clone();
             DontDestroyOnLoad(this);
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void LoadHud()
+        {
+            SceneManager.LoadScene("Hud",  LoadSceneMode.Additive);
         }
 
         private void OnDestroy()

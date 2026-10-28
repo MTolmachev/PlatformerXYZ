@@ -5,7 +5,7 @@ namespace Components.Audio
 {
     public class PlaySoundsComponent : MonoBehaviour
     {
-        [SerializeField] private AudioSource source;
+        private AudioSource source;
         [SerializeField] private AudioData[] clips;
 
         public void Play(string id)
@@ -13,6 +13,9 @@ namespace Components.Audio
             foreach (var clip in clips)
             {
                 if (clip.Id != id) continue;
+                
+                if(source == null)
+                    source = GameObject.FindWithTag("SfxAudioSource").GetComponent<AudioSource>();
                 
                 source.PlayOneShot(clip.Clip);
                 break;

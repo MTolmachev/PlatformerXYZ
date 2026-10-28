@@ -2,16 +2,16 @@
 
 namespace Model.Data.Properties
 {
-    public abstract class PersistentProperty<TPropertyType>
+    public abstract class PersistantProperty<TPropertyType>
     {
-        [SerializeField] private TPropertyType value;
-        private TPropertyType stored;
+        [SerializeField] protected TPropertyType value;
+        protected TPropertyType stored;
         private TPropertyType defaultValue;
         
         public delegate void OnPropertyChanged(TPropertyType newValue,  TPropertyType oldValue);
         public event OnPropertyChanged onChanged;
 
-        public PersistentProperty(TPropertyType defaultValue)
+        public PersistantProperty(TPropertyType defaultValue)
         {
             this.defaultValue = defaultValue;
         }

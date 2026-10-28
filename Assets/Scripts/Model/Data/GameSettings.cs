@@ -9,6 +9,9 @@ namespace Model.Data
     {
         [SerializeField] private FloatPersistentProperty musicVolume;
         [SerializeField] private FloatPersistentProperty sfxVolume;
+        
+        public FloatPersistentProperty MusicVolume => musicVolume;
+        public FloatPersistentProperty SfxVolume => sfxVolume;
 
         private static GameSettings instance;
         public static GameSettings I => instance == null ? LoadGameSettings() : instance;
