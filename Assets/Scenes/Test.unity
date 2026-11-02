@@ -5865,12 +5865,12 @@ PrefabInstance:
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3963604
+      value: 3.52
       objectReference: {fileID: 0}
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038129687
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
@@ -7852,12 +7852,12 @@ PrefabInstance:
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3199997
+      value: 4.09
       objectReference: {fileID: 0}
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4103105
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 7135816874433821687, guid: af020948c45357646811cb60f1bbc693,
         type: 3}
@@ -8755,9 +8755,13 @@ MonoBehaviour:
     inventory:
       inventory:
       - Id: Sword
-        Value: 3
+        Value: 10
+      - Id: Pearl
+        Value: 10
+      - Id: Key
+        Value: 1
     Hp:
-      value: 10
+      _value: 10
 --- !u!4 &2112915835
 Transform:
   m_ObjectHideFlags: 0
@@ -9125,12 +9129,12 @@ PrefabInstance:
     - target: {fileID: 6560297905941810456, guid: db0b2ed2c5bf31b469c62359ed9b36ea,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.15
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 6560297905941810456, guid: db0b2ed2c5bf31b469c62359ed9b36ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.29
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6560297905941810456, guid: db0b2ed2c5bf31b469c62359ed9b36ea,
         type: 3}

@@ -190,5 +190,10 @@ namespace Creatures.Character
         {
             PauseComponent.Pause();
         }
+
+        public void NextItem()
+        {
+            session.QuickInventory.SetNextItem();
+        }
     }
 }

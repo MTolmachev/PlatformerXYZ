@@ -1,4 +1,5 @@
-﻿using Model.Data;
+﻿using Model;
+using Model.Data;
 using Model.Definitions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +16,24 @@ namespace UI.Hud.QuickInventory
         private readonly CompositeDisposable trash = new CompositeDisposable();
 
         private int index;
-        
+
+        private void Start()
+        {
+            var session = FindObjectOfType<GameSession>();
+            session.QuickInventory.SelectedIndex.SubscribeAndInvoke(OnIndexChanged);
+        }
+
+        private void OnIndexChanged(int newValue, int _)
+        {
+            selection.SetActive(index == newValue);
+        }
+
         public void SetData(InventoryItemData item, int index)
         {
             this.index = index;
             var def = DefsFacade.I.Items.Get(item.Id);
             icon.sprite = def.Icon;
-            value.text = def.IsStackable ? item.Value.ToString() : string.Empty;
+            value.text = def.HasTag(ItemTag.Stackable) ? item.Value.ToString() : string.Empty;
         }
 
         

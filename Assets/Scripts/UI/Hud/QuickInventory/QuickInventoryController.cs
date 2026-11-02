@@ -15,20 +15,20 @@ namespace UI.Hud.QuickInventory
         private readonly CompositeDisposable trash = new CompositeDisposable();
         
         private GameSession session;
-        private InventoryItemData[] inventory;
+        
         private List<InventoryItemWidget> createdItems = new List<InventoryItemWidget>();
         
         private void Start()
         {
             session = FindObjectOfType<GameSession>();
-            // subscribe model
+            trash.Retain(session.QuickInventory.Subscribe(Rebuild));
 
             Rebuild();
         }
 
         private void Rebuild()
         {
-            inventory = session.Data.Inventory.GetAll();
+            var inventory = session.QuickInventory.Inventory;
             
             //create required items
             for (var i = createdItems.Count; i < inventory.Length; i++)

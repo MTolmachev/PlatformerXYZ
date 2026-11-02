@@ -1,26 +1,50 @@
-﻿using UnityEngine;
+using System;
+using Utils.Disposables;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Model.Data.Properties
 {
+    [Serializable]
     public class ObservableProperty<TPropertyType>
     {
-        [SerializeField] private TPropertyType value;
-        
-        public delegate void OnPropertyChanged(TPropertyType newValue,  TPropertyType oldValue);
-        public event OnPropertyChanged onChanged;
-        
-        public TPropertyType Value
+        [FormerlySerializedAs("value")]
+        [SerializeField] protected TPropertyType _value;
+
+        public delegate void OnPropertyChanged(TPropertyType newValue, TPropertyType oldValue);
+
+        public event OnPropertyChanged OnChanged;
+
+        public IDisposable Subscribe(OnPropertyChanged call)
         {
-            get => value;
+            OnChanged += call;
+            return new ActionDisposable(() => OnChanged -= call);
+        }
+
+        public IDisposable SubscribeAndInvoke(OnPropertyChanged call)
+        {
+            OnChanged += call;
+            var dispose = new ActionDisposable(() => OnChanged -= call);
+            call(_value, _value);
+            return dispose;
+        }
+
+        public virtual TPropertyType Value
+        {
+            get => _value;
             set
             {
-                var isSame = this.value.Equals(value);
+                var isSame = _value.Equals(value);
                 if (isSame) return;
-                var oldValue = this.value;
-                this.value = value;
-                onChanged?.Invoke(this.value, oldValue);
+                var oldValue = _value;
+                _value = value;
+                InvokeChangedEvent(_value, oldValue);
             }
-            
+        }
+
+        protected void InvokeChangedEvent(TPropertyType newValue, TPropertyType oldValue)
+        {
+            OnChanged?.Invoke(newValue, oldValue);
         }
     }
 }

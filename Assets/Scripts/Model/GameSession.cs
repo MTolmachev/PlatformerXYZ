@@ -11,6 +11,7 @@ namespace Model
         public PlayerData Data => playerData;
 
         private PlayerData savedData;
+        public QuickInventoryModel QuickInventory { get; private set; }
         private bool isReloading;
 
         private void Awake()
@@ -23,8 +24,14 @@ namespace Model
             }
         
             savedData = playerData.Clone();
+            InitModels();
             DontDestroyOnLoad(this);
             SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void InitModels()
+        {
+            QuickInventory = new QuickInventoryModel(Data);
         }
 
         private void LoadHud()
