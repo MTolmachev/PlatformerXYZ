@@ -16,6 +16,8 @@ namespace Model.Data
 
         public event Action OnChanged;
 
+        public InventoryItemData SelectedItem => Inventory[SelectedIndex.Value];
+
         public QuickInventoryModel(PlayerData data)
         {
             this.data = data;

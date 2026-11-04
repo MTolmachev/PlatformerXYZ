@@ -16,5 +16,10 @@ namespace Components.GOBased
             if (inParent)
                 instance.transform.SetParent(target);
         }
+
+        public void SetPrefab(GameObject selectedPrefab)
+        {
+            prefab = selectedPrefab;
+        }
     }
 }

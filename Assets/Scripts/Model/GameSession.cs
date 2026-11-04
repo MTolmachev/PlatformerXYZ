@@ -1,5 +1,4 @@
-﻿using System;
-using Model.Data;
+﻿using Model.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,9 +9,9 @@ namespace Model
         [SerializeField] private PlayerData playerData;
         public PlayerData Data => playerData;
 
-        private PlayerData savedData;
+        private PlayerData _savedData;
         public QuickInventoryModel QuickInventory { get; private set; }
-        private bool isReloading;
+        private bool _isReloading;
 
         private void Awake()
         {
@@ -23,7 +22,7 @@ namespace Model
                 return;
             }
         
-            savedData = playerData.Clone();
+            _savedData = playerData.Clone();
             InitModels();
             DontDestroyOnLoad(this);
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -46,19 +45,19 @@ namespace Model
 
         public void ResetToLevelStart()
         {
-            isReloading = true;
-            playerData = savedData.Clone();
+            _isReloading = true;
+            playerData = _savedData.Clone();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (isReloading)
+            if (_isReloading)
             {
-                isReloading = false;
+                _isReloading = false;
             }
             else
             {
-                savedData = playerData.Clone();
+                _savedData = playerData.Clone();
             }
         }
 

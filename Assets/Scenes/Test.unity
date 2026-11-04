@@ -8754,8 +8754,6 @@ MonoBehaviour:
   playerData:
     inventory:
       inventory:
-      - Id: Sword
-        Value: 10
       - Id: Pearl
         Value: 10
       - Id: Key
@@ -9319,6 +9317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 7509153539458339684, guid: 5c2ab90aa868760499437b82ae912a40,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
     - target: {fileID: 7509153539458339685, guid: 5c2ab90aa868760499437b82ae912a40,
         type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target

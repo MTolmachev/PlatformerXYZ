@@ -1,6 +1,7 @@
 ﻿using System;
 using Components;
 using Components.ColliderBased;
+using Components.GOBased;
 using Components.Health;
 using Model;
 using Model.Data;
@@ -26,14 +27,29 @@ namespace Creatures.Character
         [Header("Swords")]
         [SerializeField] private Cooldown throwCooldown;
         
+        
+        [SerializeField] private SpawnComponent throwSpawner;
+        
         private bool canDoubleJump;
         private bool isLastSwordThrowing;
         
         private GameSession session;
         private HealthComponent healthComponent;
+
+        private const string SwordId = "Sword";
         
-        private int SwordCount => session.Data.Inventory.Count("Sword");
+        private int SwordCount => session.Data.Inventory.Count(SwordId);
         private int CoinsCount => session.Data.Inventory.Count("Coin");
+
+        private string SelectedId => session.QuickInventory.SelectedItem.Id;
+        private bool CanThrow
+        {
+            get
+            {
+                var def = DefsFacade.I.Items.Get(SelectedId);
+                return def.HasTag(ItemTag.Throwable);
+            }
+        }
         
         private void Start()
         {
@@ -55,7 +71,7 @@ namespace Creatures.Character
 
         private void OnInventoryChanged(string id, int value)
         {
-            if(id == "Sword")
+            if(id == SwordId)
                 UpdateHeroWeapon();
         }
         
@@ -150,7 +166,7 @@ namespace Creatures.Character
 
         private void UpdateHeroWeapon()
         {
-            var numSwords = session.Data.Inventory.Count("Sword");
+            var numSwords = session.Data.Inventory.Count(SwordId);
             if(isLastSwordThrowing) return;
             Animator.runtimeAnimatorController = SwordCount > 0 ? armed : unarmed;
         }
@@ -158,7 +174,14 @@ namespace Creatures.Character
         public void OnDoThrow()
         {
             Sounds.Play("Range");
-            particles.Spawn("Throw");
+            var throwableId = session.QuickInventory.SelectedItem.Id;
+            var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
+            
+            throwSpawner.SetPrefab(throwableDef.Projectile);
+            throwSpawner.Spawn();
+            
+            session.Data.Inventory.Remove(throwableId, 1);
+            
             isLastSwordThrowing = false;
             UpdateHeroWeapon();
         }
@@ -166,16 +189,10 @@ namespace Creatures.Character
 
         public void Throw()
         {
-            if (throwCooldown.IsReady && SwordCount > 0)
-            {
-                Animator.SetTrigger(ThrowKey);
-                if(SwordCount == 1)
-                    isLastSwordThrowing = true;
+            if (!throwCooldown.IsReady || !CanThrow) return;
+            Animator.SetTrigger(ThrowKey);
                 
-                session.Data.Inventory.Remove("Sword", 1);
-                
-                throwCooldown.Reset();
-            }
+            throwCooldown.Reset();
         }
 
         public void UsePotion()
