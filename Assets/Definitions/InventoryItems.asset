@@ -22,9 +22,15 @@ MonoBehaviour:
   - id: Key
     icon: {fileID: 21300000, guid: ce834f20e34a9974d9da6de44f3e2da5, type: 3}
     tags: 
+  - id: HealthPotionSmall
+    icon: {fileID: 1185527514606905908, guid: 402de55959320f64da81408725a5c561, type: 3}
+    tags: 000000000100000003000000
   - id: HealthPotion
     icon: {fileID: 3714227102187029162, guid: 402de55959320f64da81408725a5c561, type: 3}
-    tags: 
+    tags: 000000000100000003000000
+  - id: HealthPotionLarge
+    icon: {fileID: 2011574832808370117, guid: 402de55959320f64da81408725a5c561, type: 3}
+    tags: 000000000100000003000000
   - id: Pearl
     icon: {fileID: 21300000, guid: 22df66776268c57409ecda83ea2039f7, type: 3}
     tags: 000000000100000002000000

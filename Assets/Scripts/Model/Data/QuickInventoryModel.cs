@@ -16,8 +16,6 @@ namespace Model.Data
 
         public event Action OnChanged;
 
-        public InventoryItemData SelectedItem => Inventory[SelectedIndex.Value];
-
         public QuickInventoryModel(PlayerData data)
         {
             this.data = data;
@@ -34,16 +32,44 @@ namespace Model.Data
 
         private void OnChangedInventory(string id, int value)
         {
-            var indexFound = Array.FindIndex(Inventory, item => item.Id == id);
-            if (indexFound == -1) return;
+            var changedItemDef = DefsFacade.I.Items.Get(id);
+            if (!changedItemDef.HasTag(ItemTag.Usable)) return;
+
+            var selectedId = TryGetSelectedItem(out var selectedItem) ? selectedItem.Id : null;
             Inventory = data.Inventory.GetAll(ItemTag.Usable);
-            SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
+
+            if (Inventory.Length == 0)
+            {
+                SelectedIndex.Value = 0;
+            }
+            else
+            {
+                var previousItemIndex = Array.FindIndex(Inventory, item => item.Id == selectedId);
+                SelectedIndex.Value = previousItemIndex >= 0
+                    ? previousItemIndex
+                    : Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
+            }
+
             OnChanged?.Invoke();
         }
 
         public void SetNextItem()
         {
+            if (Inventory.Length <= 1) return;
+
             SelectedIndex.Value = (int) Mathf.Repeat(SelectedIndex.Value + 1, Inventory.Length);
+        }
+
+        public bool TryGetSelectedItem(out InventoryItemData item)
+        {
+            if (Inventory.Length == 0 || SelectedIndex.Value < 0 || SelectedIndex.Value >= Inventory.Length)
+            {
+                item = null;
+                return false;
+            }
+
+            item = Inventory[SelectedIndex.Value];
+            return true;
         }
     }
 }

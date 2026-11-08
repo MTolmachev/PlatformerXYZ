@@ -9,13 +9,17 @@ namespace Components.Collectables
     public class InventoryAddComponent : MonoBehaviour
     {
         [InventoryId][SerializeField] private string id;
-        
         [SerializeField] private int count;
+        [SerializeField] private bool destroyOnSuccess;
 
         public void Add(GameObject go)
         {
             var receiver = go.GetInterface<ICanAddInInventory>();
-            receiver?.AddInInventory(id, count);
+            if (receiver == null || !receiver.TryAddInInventory(id, count)) return;
+            if (!destroyOnSuccess) return;
+
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

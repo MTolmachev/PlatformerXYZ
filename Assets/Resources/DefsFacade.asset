@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: {fileID: 11400000, guid: 3b073e4139edf1c48a9401d89e1a3896, type: 2}
   throwableItems: {fileID: 11400000, guid: 5b3341fdf2992b44f93675b4416bb956, type: 2}
+  healthItems: {fileID: 11400000, guid: ca580fb30acc4e11958cb44952cab54f, type: 2}
   player: {fileID: 11400000, guid: 8ba4c697986a7bb458514bb84ca6df4e, type: 2}

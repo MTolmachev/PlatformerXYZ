@@ -15,23 +15,21 @@ namespace Model.Data
         
         public OnInventoryChanged OnChanged;
         
-        public void Add(string id, int value)
+        public bool Add(string id, int value)
         {
-            if (value <= 0) return;
+            if (value <= 0) return false;
 
             var itemDef = DefsFacade.I.Items.Get(id);
-            if (itemDef.IsVoid) return;
+            if (itemDef.IsVoid) return false;
 
-            if (itemDef.HasTag(ItemTag.Stackable))
-            {
-                AddToStack(id, value);
-            }
-            else
-            {
-                AddNonStack(id, value);
-            }
+            var isAdded = itemDef.HasTag(ItemTag.Stackable)
+                ? AddToStack(id, value)
+                : AddNonStack(id, value);
+
+            if (!isAdded) return false;
 
             OnChanged?.Invoke(id, Count(id));
+            return true;
         }
 
         public InventoryItemData[] GetAll(params ItemTag[] tags)
@@ -47,31 +45,35 @@ namespace Model.Data
             return retValue.ToArray();
         }
 
-        private void AddToStack(string id, int value)
+        private bool AddToStack(string id, int value)
         {
             var isFull = inventory.Count >= DefsFacade.I.Player.InventorySize;
             var item = GetItem(id);
             if (item == null)
             {
-                if (isFull) return;
+                if (isFull) return false;
 
                 item = new InventoryItemData(id);
                 inventory.Add(item);
             }
 
             item.Value += value;
+            return true;
         }
 
-        private void AddNonStack(string id, int value)
+        private bool AddNonStack(string id, int value)
         {
             var itemsLeft = DefsFacade.I.Player.InventorySize - inventory.Count;
             value = Mathf.Min(itemsLeft, value);
+            if (value <= 0) return false;
 
             for (var i = 0; i < value; i++)
             {
                 var item = new InventoryItemData(id) { Value = 1 };
                 inventory.Add(item);
             }
+
+            return true;
         }
 
         public void Remove(string id, int value)

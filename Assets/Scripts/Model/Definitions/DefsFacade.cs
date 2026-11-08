@@ -8,10 +8,21 @@ namespace Model.Definitions
     {
         [SerializeField] private InventoryItemsDef items;
         [SerializeField] private ThrowableItemsDef throwableItems;
+        [SerializeField] private HealthItemsDef healthItems;
         [SerializeField] private PlayerDef player;
         
         public InventoryItemsDef Items => items;
         public ThrowableItemsDef ThrowableItems => throwableItems;
+        public HealthItemsDef HealthItems
+        {
+            get
+            {
+                if (healthItems == null)
+                    healthItems = Resources.Load<HealthItemsDef>("HealthItems");
+
+                return healthItems;
+            }
+        }
         public PlayerDef Player => player;
         
         private static DefsFacade _instance;

@@ -20,7 +20,7 @@ namespace UI.Hud.QuickInventory
         private void Start()
         {
             var session = FindObjectOfType<GameSession>();
-            session.QuickInventory.SelectedIndex.SubscribeAndInvoke(OnIndexChanged);
+            trash.Retain(session.QuickInventory.SelectedIndex.SubscribeAndInvoke(OnIndexChanged));
         }
 
         private void OnIndexChanged(int newValue, int _)
@@ -36,6 +36,9 @@ namespace UI.Hud.QuickInventory
             value.text = def.HasTag(ItemTag.Stackable) ? item.Value.ToString() : string.Empty;
         }
 
-        
+        private void OnDestroy()
+        {
+            trash.Dispose();
+        }
     }
 }

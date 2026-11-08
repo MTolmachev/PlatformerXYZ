@@ -9,9 +9,10 @@ namespace Components.Collectables
     {
         [SerializeField] private List<InventoryItemData> items = new List<InventoryItemData>();
 
-        public void AddInInventory(string id, int value)
+        public bool TryAddInInventory(string id, int value)
         {
             items.Add(new InventoryItemData(id) { Value = value });
+            return true;
         }
 
         public void DropInInventory()

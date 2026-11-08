@@ -41,12 +41,14 @@ namespace Creatures.Character
         private int SwordCount => session.Data.Inventory.Count(SwordId);
         private int CoinsCount => session.Data.Inventory.Count("Coin");
 
-        private string SelectedId => session.QuickInventory.SelectedItem.Id;
         private bool CanThrow
         {
             get
             {
-                var def = DefsFacade.I.Items.Get(SelectedId);
+                if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem))
+                    return false;
+
+                var def = DefsFacade.I.Items.Get(selectedItem.Id);
                 return def.HasTag(ItemTag.Throwable);
             }
         }
@@ -76,9 +78,9 @@ namespace Creatures.Character
         }
         
 
-        public void AddInInventory(string id, int value)
+        public bool TryAddInInventory(string id, int value)
         {
-            session.Data.Inventory.Add(id, value);
+            return session.Data.Inventory.Add(id, value);
         }
 
         public int GetCoinsValue()
@@ -173,8 +175,10 @@ namespace Creatures.Character
 
         public void OnDoThrow()
         {
+            if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
+
             Sounds.Play("Range");
-            var throwableId = session.QuickInventory.SelectedItem.Id;
+            var throwableId = selectedItem.Id;
             var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
             
             throwSpawner.SetPrefab(throwableDef.Projectile);
@@ -197,10 +201,16 @@ namespace Creatures.Character
 
         public void UsePotion()
         {
-            var itemsCount = session.Data.Inventory.Count("HealthPotion");
-            if (itemsCount <= 0) return;
-            healthComponent.TakeHeal(5);
-            session.Data.Inventory.Remove("HealthPotion", 1);
+            if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
+
+            var itemDef = DefsFacade.I.Items.Get(selectedItem.Id);
+            if (!itemDef.HasTag(ItemTag.Healing)) return;
+
+            var healthItemDef = DefsFacade.I.HealthItems.Get(selectedItem.Id);
+            if (healthItemDef.IsVoid) return;
+
+            if (healthComponent.TryHeal(healthItemDef.HealAmount))
+                session.Data.Inventory.Remove(selectedItem.Id, 1);
         }
 
         public void MakePause()
