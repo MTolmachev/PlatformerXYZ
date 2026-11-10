@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utils;
 
 namespace Components.Audio
 {
@@ -15,7 +16,7 @@ namespace Components.Audio
                 if (clip.Id != id) continue;
                 
                 if(source == null)
-                    source = GameObject.FindWithTag("SfxAudioSource").GetComponent<AudioSource>();
+                    source = AudioUtils.FindSfxSource();
                 
                 source.PlayOneShot(clip.Clip);
                 break;

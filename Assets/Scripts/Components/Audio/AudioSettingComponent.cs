@@ -38,7 +38,12 @@ namespace Components.Audio
                     throw new ArgumentException("Undefined mode");
             }
 
-            
+        }
+
+        private void OnDestroy()
+        {
+            if (model != null)
+                model.onChanged -= OnSoundSettingChanged;
         }
     }
 }
