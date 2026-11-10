@@ -1,4 +1,5 @@
 ﻿using Components;
+using Components.Audio;
 using Components.ColliderBased;
 using Components.GOBased;
 using UnityEngine;
@@ -23,8 +24,10 @@ namespace Creatures
         [SerializeField] protected SpawnListComponent particles;
 
         private Vector2 direction;
+        private float speedMultiplier = 1f;
         protected Rigidbody2D Rb;
         protected Animator Animator;
+        protected PlaySoundsComponent Sounds;
 
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int VerticalVelocity = Animator.StringToHash("verticalVelocity");
@@ -36,11 +39,17 @@ namespace Creatures
         {
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponent<Animator>(); 
+            Sounds = GetComponent<PlaySoundsComponent>();
         }
         
         public void SetDirection(Vector2 dir)
         {
             this.direction = dir;
+        }
+
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            speedMultiplier = Mathf.Max(0f, multiplier);
         }
         
         protected bool IsGrounded()
@@ -50,7 +59,7 @@ namespace Creatures
         
         private void FixedUpdate()
         {
-            Rb.velocity = new Vector2(direction.x * speed, Rb.velocity.y);
+            Rb.velocity = new Vector2(direction.x * speed * speedMultiplier, Rb.velocity.y);
 
             UpdateSpriteDirection(direction);
             
@@ -78,6 +87,7 @@ namespace Creatures
         public virtual void Attack()
         {
             Animator.SetTrigger(Attacking);
+            Sounds.Play("Melee");
         }
         
         public void OnAttack()

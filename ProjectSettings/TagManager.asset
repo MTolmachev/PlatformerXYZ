@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Interactable
   - Trash
+  - SfxAudioSource
   layers:
   - Default
   - TransparentFX

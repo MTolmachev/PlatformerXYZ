@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 3529373237251465897}
   - component: {fileID: 6345767355473387835}
   - component: {fileID: 51624299551056718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   tag: Player
   layer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32567
   action:
     m_PersistentCalls:
       m_Calls:
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 7228575751701751046}
   - component: {fileID: 2066571899139418993}
   - component: {fileID: 271766314811506733}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PatrolWallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 7509153539260648915}
   - component: {fileID: 7509153539260648913}
   - component: {fileID: 7509153539260648912}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 1574814831}
   - component: {fileID: 8850509981894730294}
   - component: {fileID: 7627400898880833916}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -455,7 +455,8 @@ GameObject:
   - component: {fileID: 7509153539458339684}
   - component: {fileID: 4795297894837000746}
   - component: {fileID: 602663116}
-  m_Layer: 0
+  - component: {fileID: 3669236958049600810}
+  m_Layer: 13
   m_Name: Sharky
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -709,6 +710,20 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   threshold: 1
+--- !u!114 &3669236958049600810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539458339612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f15f257280644e8abc20f6d6e48400d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  clips: []
 --- !u!1 &8457116933384834300
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +735,7 @@ GameObject:
   - component: {fileID: 2259521698896598100}
   - component: {fileID: 1871754239479910079}
   - component: {fileID: 1400426153481502823}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PatrolGroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

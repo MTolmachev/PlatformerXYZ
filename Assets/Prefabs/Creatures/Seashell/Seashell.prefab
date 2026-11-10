@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.5, y: 0.1}
+  m_Offset: {x: -1.4275212, y: 0.100000024}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 1.2}
+  m_Size: {x: 4.123417, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &3829435378853107201
 MonoBehaviour:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3829435379525902076}
-  prefab: {fileID: 6503295855683216892, guid: af7b98d9f0ba6cc4ead131bfe8e86e5a, type: 3}
+  prefab: {fileID: 6503295855683216892, guid: 7c951327ee236c8408022b13126149a2, type: 3}
   inParent: 0
 --- !u!1 &3829435380029184258
 GameObject:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde91d8acf52a9f4b9a0ee0f98ba1580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 1
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -389,7 +389,7 @@ MonoBehaviour:
   meleeAttack: {fileID: 3829435380506666012}
   meleeCanAttack: {fileID: 3829435380506666017}
   meleeCooldown:
-    value: 2
+    value: 5
   rangeAttack: {fileID: 3829435379525902077}
   rangeCooldown:
     value: 2

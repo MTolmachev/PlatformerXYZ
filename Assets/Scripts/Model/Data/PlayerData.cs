@@ -1,4 +1,5 @@
 ﻿using System;
+using Model.Data.Properties;
 using UnityEngine;
 
 namespace Model.Data
@@ -10,20 +11,12 @@ namespace Model.Data
         
         public InventoryData Inventory => inventory;
         
-        public int maxHp;
-        public int hp;
-
-
+        public IntProperty Hp = new IntProperty();
+        
         public PlayerData Clone()
         {
-            return new PlayerData
-            {
-                maxHp = this.maxHp,
-                hp = this.hp,
-            };
-
-            //var json = JsonUtility.ToJson(this);
-            //return JsonUtility.FromJson<PlayerData>(json);
+            var json = JsonUtility.ToJson(this);
+            return JsonUtility.FromJson<PlayerData>(json);
         }
     }
 }
