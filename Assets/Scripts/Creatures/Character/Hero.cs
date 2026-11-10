@@ -1,6 +1,7 @@
 ﻿using System;
 using Components;
 using Components.ColliderBased;
+using Components.GOBased;
 using Components.Health;
 using Model;
 using Model.Data;
@@ -12,7 +13,7 @@ using Utils;
 
 namespace Creatures.Character
 {
-    public class Hero : Creature
+    public class Hero : Creature, ICanAddInInventory
     {
         private static readonly int ThrowKey = Animator.StringToHash("throw");
 
@@ -25,20 +26,32 @@ namespace Creatures.Character
         
         [Header("Swords")]
         [SerializeField] private Cooldown throwCooldown;
-        [SerializeField] private int maxSwords;
         
-        [Header("Inventory")]
-        [SerializeField] private int maxWeight;
+        
+        [SerializeField] private SpawnComponent throwSpawner;
         
         private bool canDoubleJump;
         private bool isLastSwordThrowing;
         
         private GameSession session;
         private HealthComponent healthComponent;
+
+        private const string SwordId = "Sword";
         
-        private int SwordCount => session.Data.Inventory.Count("Sword");
+        private int SwordCount => session.Data.Inventory.Count(SwordId);
         private int CoinsCount => session.Data.Inventory.Count("Coin");
-        private int HealPotionCount => session.Data.Inventory.Count("HealPotion");
+
+        private bool CanThrow
+        {
+            get
+            {
+                if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem))
+                    return false;
+
+                var def = DefsFacade.I.Items.Get(selectedItem.Id);
+                return def.HasTag(ItemTag.Throwable);
+            }
+        }
         
         private void Start()
         {
@@ -60,24 +73,14 @@ namespace Creatures.Character
 
         private void OnInventoryChanged(string id, int value)
         {
-            if(id == "Sword")
+            if(id == SwordId)
                 UpdateHeroWeapon();
         }
         
 
-        public bool AddInInventory(string id, int value)
+        public bool TryAddInInventory(string id, int value)
         {
-            var itemDef = DefsFacade.I.Items.Get(id);
-            if(itemDef.IsVoid) return false;
-            
-            var itemWeight = itemDef.Weight * value;
-            var weight = session.Data.Inventory.WeightCount();
-            
-            if(weight + itemWeight > maxWeight) return false;
-            if (id == "Sword" && SwordCount + value > maxSwords) return false;
-            
-            session.Data.Inventory.Add(id, value);
-            return true;
+            return session.Data.Inventory.Add(id, value);
         }
 
         public int GetCoinsValue()
@@ -88,14 +91,6 @@ namespace Creatures.Character
         public void CollectGold(int amount)
         {
             session.Data.Inventory.Add("Coin", amount);
-        }
-        
-        public bool TryCollectSword(int amount)
-        {
-            if (SwordCount + amount > maxSwords) return false;
-            session.Data.Inventory.Add("Sword", amount);
-            
-            return true;
         }
         
         public void OnHealthChanged(int health)
@@ -173,15 +168,24 @@ namespace Creatures.Character
 
         private void UpdateHeroWeapon()
         {
-            var numSwords = session.Data.Inventory.Count("Sword");
+            var numSwords = session.Data.Inventory.Count(SwordId);
             if(isLastSwordThrowing) return;
             Animator.runtimeAnimatorController = SwordCount > 0 ? armed : unarmed;
         }
 
         public void OnDoThrow()
         {
+            if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
+
             Sounds.Play("Range");
-            particles.Spawn("Throw");
+            var throwableId = selectedItem.Id;
+            var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
+            
+            throwSpawner.SetPrefab(throwableDef.Projectile);
+            throwSpawner.Spawn();
+            
+            session.Data.Inventory.Remove(throwableId, 1);
+            
             isLastSwordThrowing = false;
             UpdateHeroWeapon();
         }
@@ -189,29 +193,34 @@ namespace Creatures.Character
 
         public void Throw()
         {
-            if (throwCooldown.IsReady && SwordCount > 0)
-            {
-                Animator.SetTrigger(ThrowKey);
-                if(SwordCount == 1)
-                    isLastSwordThrowing = true;
+            if (!throwCooldown.IsReady || !CanThrow) return;
+            Animator.SetTrigger(ThrowKey);
                 
-                session.Data.Inventory.Remove("Sword", 1);
-                
-                throwCooldown.Reset();
-            }
+            throwCooldown.Reset();
         }
 
         public void UsePotion()
         {
-            var itemsCount = session.Data.Inventory.Count("HealPotion");
-            if (itemsCount <= 0) return;
-            session.Data.Inventory.Remove("HealPotion", 1);
-            healthComponent.TryHeal(1);
+            if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
+
+            var itemDef = DefsFacade.I.Items.Get(selectedItem.Id);
+            if (!itemDef.HasTag(ItemTag.Healing)) return;
+
+            var healthItemDef = DefsFacade.I.HealthItems.Get(selectedItem.Id);
+            if (healthItemDef.IsVoid) return;
+
+            if (healthComponent.TryHeal(healthItemDef.HealAmount))
+                session.Data.Inventory.Remove(selectedItem.Id, 1);
         }
 
         public void MakePause()
         {
             PauseComponent.Pause();
+        }
+
+        public void NextItem()
+        {
+            session.QuickInventory.SetNextItem();
         }
     }
 }

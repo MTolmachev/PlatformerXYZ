@@ -15,46 +15,114 @@ namespace Model.Data
         
         public OnInventoryChanged OnChanged;
         
-        public void Add(string id, int value)
+        public bool Add(string id, int value)
         {
-            if(value <= 0) return;
+            if (value <= 0) return false;
 
             var itemDef = DefsFacade.I.Items.Get(id);
-            if(itemDef.IsVoid) return;
+            if (itemDef.IsVoid) return false;
 
+            var isAdded = itemDef.HasTag(ItemTag.Stackable)
+                ? AddToStack(id, value)
+                : AddNonStack(id, value);
+
+            if (!isAdded) return false;
+
+            OnChanged?.Invoke(id, Count(id));
+            return true;
+        }
+
+        public InventoryItemData[] GetAll(params ItemTag[] tags)
+        {
+            var retValue = new List<InventoryItemData>();
+            foreach (var item in inventory)
+            {
+                var itemDef = DefsFacade.I.Items.Get(item.Id);
+                var isAllRequirementsMet = tags.All(x => itemDef.HasTag(x));
+                if(isAllRequirementsMet)
+                    retValue.Add(item);
+            }
+            return retValue.ToArray();
+        }
+
+        private bool AddToStack(string id, int value)
+        {
+            var isFull = inventory.Count >= DefsFacade.I.Player.InventorySize;
             var item = GetItem(id);
-
             if (item == null)
             {
+                if (isFull) return false;
+
                 item = new InventoryItemData(id);
                 inventory.Add(item);
-                item.Weight = itemDef.Weight;
             }
-            
+
             item.Value += value;
-            
-            OnChanged?.Invoke(id, Count(id));
+            return true;
+        }
+
+        private bool AddNonStack(string id, int value)
+        {
+            var itemsLeft = DefsFacade.I.Player.InventorySize - inventory.Count;
+            value = Mathf.Min(itemsLeft, value);
+            if (value <= 0) return false;
+
+            for (var i = 0; i < value; i++)
+            {
+                var item = new InventoryItemData(id) { Value = 1 };
+                inventory.Add(item);
+            }
+
+            return true;
         }
 
         public void Remove(string id, int value)
         {
             var itemDef = DefsFacade.I.Items.Get(id);
-            if(itemDef.IsVoid) return;
-            
-            var item = GetItem(id);
-            if(item == null) return;
-            
-            item.Value -= value;
-            
-            if(item.Value <= 0)
-                inventory.Remove(item);
-            
+            if (itemDef.IsVoid) return;
+
+            if (itemDef.HasTag(ItemTag.Stackable))
+            {
+                RemoveFromStack(id, value);
+            }
+            else
+            {
+                RemoveNonStack(id, value);
+            }
+
             OnChanged?.Invoke(id, Count(id));
+        }
+
+        private void RemoveFromStack(string id, int value)
+        {
+            var item = GetItem(id);
+            if (item == null) return;
+
+            item.Value -= value;
+            if (item.Value <= 0)
+                inventory.Remove(item);
+        }
+
+        private void RemoveNonStack(string id, int value)
+        {
+            for (var i = 0; i < value; i++)
+            {
+                var item = GetItem(id);
+                if (item == null) return;
+
+                inventory.Remove(item);
+            }
         }
 
         private InventoryItemData GetItem(string id)
         {
-            return inventory.FirstOrDefault(item => item.Id == id);
+            foreach (var item in inventory)
+            {
+                if (item.Id == id)
+                    return item;
+            }
+
+            return null;
         }
 
         public int Count(string id)
@@ -62,25 +130,20 @@ namespace Model.Data
             var count = 0;
             foreach (var item in inventory)
             {
-                if(item.Id == id) count += item.Value;
+                if (item.Id == id)
+                    count += item.Value;
             }
             return count;
         }
 
-        public float WeightCount()
-        {
-            return inventory.Sum(item => item.Weight *  item.Value);
-        }
     }
 
     [Serializable]
     public class InventoryItemData
     {
-        [InventoryId]public string Id;
-        public float Weight;
+        [InventoryId] public string Id;
         public int Value;
-        
-        //public InventoryItemData() { }
+
         public InventoryItemData(string id)
         {
             Id = id;

@@ -14,10 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - id: Coin
-    weight: 0
+    icon: {fileID: 6582046967323461550, guid: 4bf570231f136924baadd30fc11fe93c, type: 3}
+    tags: 0000000001000000
   - id: Sword
-    weight: 5
+    icon: {fileID: 21300000, guid: d5ca5d25aae985945b297bee4ad960d1, type: 3}
+    tags: 000000000100000002000000
   - id: Key
-    weight: 1
-  - id: HealPotion
-    weight: 1
+    icon: {fileID: 21300000, guid: ce834f20e34a9974d9da6de44f3e2da5, type: 3}
+    tags: 
+  - id: HealthPotionSmall
+    icon: {fileID: 1185527514606905908, guid: 402de55959320f64da81408725a5c561, type: 3}
+    tags: 000000000100000003000000
+  - id: HealthPotion
+    icon: {fileID: 3714227102187029162, guid: 402de55959320f64da81408725a5c561, type: 3}
+    tags: 000000000100000003000000
+  - id: HealthPotionLarge
+    icon: {fileID: 2011574832808370117, guid: 402de55959320f64da81408725a5c561, type: 3}
+    tags: 000000000100000003000000
+  - id: Pearl
+    icon: {fileID: 21300000, guid: 22df66776268c57409ecda83ea2039f7, type: 3}
+    tags: 000000000100000002000000

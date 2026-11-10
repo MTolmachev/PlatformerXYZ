@@ -59,5 +59,13 @@ namespace Creatures.Character
             hero.MakePause();
          }
       }
+      
+      public void OnNextItem(InputAction.CallbackContext context)
+      {
+         if (context.performed)
+         {
+            hero.NextItem();
+         }
+      }
    }
 }

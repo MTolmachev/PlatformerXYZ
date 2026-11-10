@@ -14,7 +14,7 @@ namespace UI.Hud
         private void Start()
         {
             session = FindObjectOfType<GameSession>();
-            session.Data.Hp.onChanged += OnHealthChanged;
+            session.Data.Hp.OnChanged += OnHealthChanged;
             OnHealthChanged(session.Data.Hp.Value, 0);
         }
 
@@ -32,7 +32,7 @@ namespace UI.Hud
 
         private void OnDestroy()
         {
-            session.Data.Hp.onChanged -= OnHealthChanged;
+            session.Data.Hp.OnChanged -= OnHealthChanged;
         }
     }
 }

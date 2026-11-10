@@ -193,23 +193,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8259355136060555776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4188586341429726820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72a4ea1a99704a1c9207a6333e06aeb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: Key
-  amount: 1
-  onSuccess:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8858428352758139103}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -232,6 +215,20 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8259355136060555776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188586341429726820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a4ea1a99704a1c9207a6333e06aeb7, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  id: Key
+  count: 1
 --- !u!114 &8400367995857854310
 MonoBehaviour:
   m_ObjectHideFlags: 0

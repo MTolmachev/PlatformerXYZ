@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 168142849757999161}
   - component: {fileID: 4783502177474415700}
   m_Layer: 0
-  m_Name: ThrowSwordSpawnPosition
+  m_Name: ThrowSpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -469,8 +469,7 @@ MonoBehaviour:
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:
     value: 1
-  maxSwords: 5
-  maxWeight: 20
+  throwSpawner: {fileID: 4783502177474415700}
 --- !u!114 &7509153539458339685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +772,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e347014a-e68d-4235-8962-f599129c75b8
     m_ActionName: Hero/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7509153539458339613}
+        m_MethodName: OnNextItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1060fadd-1a92-44e0-8110-751c9de654bc
+    m_ActionName: Hero/NextItem[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
