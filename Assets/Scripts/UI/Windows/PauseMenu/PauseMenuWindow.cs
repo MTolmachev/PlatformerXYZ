@@ -44,6 +44,13 @@ namespace UI.PauseMenu
             };
             Close();
         }
+        
+        public void OnLanguages()
+        {
+            var window = Resources.Load<GameObject>("UI/LocalizationWindow");
+            var canvas = FindObjectOfType<Canvas>();
+            Instantiate(window, canvas.transform);
+        }
 
         public override void OnCloseAnimationComplete()
         {

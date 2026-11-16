@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Crabby_GetGem
   m_EditorClassIdentifier: 
   data:
-    sentences:
-    - Bring me a Green Gem!
-    - And I will show you a miracle.
+    sentenceKeys:
+    - dialog_crabby_get_gem_01
+    - dialog_crabby_get_gem_02

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Model.Data;
+using Model.Definitions.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -47,7 +48,7 @@ namespace UI.Hud.Dialogs
         private IEnumerator TypeDialogText()
         {
             text.text = string.Empty;
-            var sentence = data.Sentences[currentSentence];
+            var sentence = GetCurrentSentence();
             
             foreach (var letter in sentence)
             {
@@ -64,7 +65,7 @@ namespace UI.Hud.Dialogs
             if(typingRoutine == null) return;
 
             StopTypeAnimation();
-            text.text = data.Sentences[currentSentence];
+            text.text = GetCurrentSentence();
         }
 
         private void StopTypeAnimation()
@@ -79,7 +80,7 @@ namespace UI.Hud.Dialogs
             StopTypeAnimation();
             currentSentence++;
             
-            var isDialogCompleted = currentSentence >= data.Sentences.Length;
+            var isDialogCompleted = currentSentence >= data.SentenceKeys.Length;
             if (isDialogCompleted)
             {
                 HideDialogBox();
@@ -99,6 +100,12 @@ namespace UI.Hud.Dialogs
         private void OnStartDialogAnimation()
         {
             typingRoutine = StartCoroutine(TypeDialogText());
+        }
+
+        private string GetCurrentSentence()
+        {
+            var key = data.SentenceKeys[currentSentence];
+            return LocalizationManager.I.Localize(key);
         }
 
         private void OnCloseAnimationComplete()

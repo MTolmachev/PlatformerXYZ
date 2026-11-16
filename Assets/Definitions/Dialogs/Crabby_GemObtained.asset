@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Crabby_GemObtained
   m_EditorClassIdentifier: 
   data:
-    sentences:
-    - And now the Miracle.
-    - I have a Gem
-    - And you are not
-    - Ha ha ha ha
+    sentenceKeys:
+    - dialog_crabby_gem_obtained_01
+    - dialog_crabby_gem_obtained_02
+    - dialog_crabby_gem_obtained_03
+    - dialog_crabby_gem_obtained_04

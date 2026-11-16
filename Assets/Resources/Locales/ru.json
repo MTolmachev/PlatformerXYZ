@@ -1,0 +1,21 @@
+{
+  "items": [
+    { "key": "menu_title", "value": "Меню" },
+    { "key": "button_start", "value": "Начать" },
+    { "key": "button_option", "value": "Настройки" },
+    { "key": "button_exit", "value": "Выход" },
+    { "key": "selected_language", "value": "Выбран язык: {0}" },
+    { "key": "button_back", "value": "Назад" },
+    { "key": "button_locales", "value": "Язык" },
+    { "key": "button_continue", "value": "Продолжить" },
+    { "key": "button_restart", "value": "Начать заново" },
+    { "key": "dialog_crabby_get_gem_01", "value": "Принеси мне зелёный самоцвет!" },
+    { "key": "dialog_crabby_get_gem_02", "value": "И я покажу тебе чудо." },
+    { "key": "dialog_crabby_gem_obtained_01", "value": "А теперь — чудо." },
+    { "key": "dialog_crabby_gem_obtained_02", "value": "У меня есть самоцвет." },
+    { "key": "dialog_crabby_gem_obtained_03", "value": "А у тебя — нет." },
+    { "key": "dialog_crabby_gem_obtained_04", "value": "Ха-ха-ха-ха!" },
+    { "key": "dialog_need_key_01", "value": "Тебе нужен ключ!" },
+    { "key": "dialog_need_key_02", "value": "Попробуй найти его." }
+  ]
+}

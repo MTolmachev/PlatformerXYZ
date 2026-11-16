@@ -6142,9 +6142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   bound:
-    sentences:
-    - You need a key!
-    - Try to find it.
+    sentenceKeys: []
   external: {fileID: 0}
 --- !u!1 &1020920917
 GameObject:

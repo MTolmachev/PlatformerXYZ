@@ -30,5 +30,10 @@ namespace UI.Localization
             var localized = LocalizationManager.I.Localize(key);
             text.text = capitalize ? localized.ToUpper() : localized;
         }
+
+        private void OnDestroy()
+        {
+            LocalizationManager.I.OnLocaleChanged -= OnLocaleChanged;
+        }
     }
 }
