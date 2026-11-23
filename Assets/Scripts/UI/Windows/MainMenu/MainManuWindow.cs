@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI.MainMenu
+namespace UI.Windows.MainMenu
 {
     public class MainManuWindow : AnimatedWindow
     {
@@ -26,7 +26,7 @@ namespace UI.MainMenu
         {
             closeAction = () =>
             {
-                SceneManager.LoadScene("Level 1");
+                SceneManager.LoadScene("Test");
             };
             Close();
         }

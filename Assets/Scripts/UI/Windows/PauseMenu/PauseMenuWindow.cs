@@ -1,5 +1,6 @@
 ﻿using System;
 using Components.LevelManagement;
+using Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,14 +9,14 @@ namespace UI.PauseMenu
     [RequireComponent(typeof(ReloadLevelComponent))]
     public class PauseMenuWindow : AnimatedWindow
     {
-        private Action closeAction;
-        
-        private ReloadLevelComponent reloadLevel;
+        private float defaultTimeScale;
 
         protected override void Start()
         {
             base.Start();
-            reloadLevel = GetComponent<ReloadLevelComponent>();
+
+            defaultTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
         }
 
         public void OnShowSettings()
@@ -25,37 +26,18 @@ namespace UI.PauseMenu
             Instantiate(window, canvas.transform);
         }
         
-        public void OnRestartGame()
-        {
-            closeAction = () =>
-            {
-                reloadLevel.Reload();
-                Time.timeScale = 1f;
-            };
-            Close();
-        }
-
         public void OnExit()
         {
-            closeAction = () =>
-            {
-                SceneManager.LoadScene("MainMenu");
-                Time.timeScale = 1f;
-            };
-            Close();
-        }
-        
-        public void OnLanguages()
-        {
-            var window = Resources.Load<GameObject>("UI/LocalizationWindow");
-            var canvas = FindObjectOfType<Canvas>();
-            Instantiate(window, canvas.transform);
+            var session = FindObjectOfType<GameSession>();
+            if (session != null)
+                Destroy(session.gameObject);
+
+            SceneManager.LoadScene("MainMenu");
         }
 
-        public override void OnCloseAnimationComplete()
+        private void OnDestroy()
         {
-            base.OnCloseAnimationComplete();
-            closeAction?.Invoke();
+            Time.timeScale = defaultTimeScale;
         }
     }
 }

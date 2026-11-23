@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Components;
 using Components.ColliderBased;
 using Components.GOBased;
@@ -26,12 +27,17 @@ namespace Creatures.Character
         
         [Header("Swords")]
         [SerializeField] private Cooldown throwCooldown;
-        
-        
+
+        [Header("Triple Throw")]
+        [SerializeField] private Cooldown tripleThrowHoldCooldown;
+        [SerializeField] private int tripleThrowCount;
+        [SerializeField] private float tripleThrowDelay;
+
         [SerializeField] private SpawnComponent throwSpawner;
         
         private bool canDoubleJump;
         private bool isLastSwordThrowing;
+        private bool isTripleThrow;
         
         private GameSession session;
         private HealthComponent healthComponent;
@@ -47,6 +53,9 @@ namespace Creatures.Character
             {
                 if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem))
                     return false;
+
+                if (selectedItem.Id == SwordId)
+                    return SwordCount > 1;
 
                 var def = DefsFacade.I.Items.Get(selectedItem.Id);
                 return def.HasTag(ItemTag.Throwable);
@@ -177,8 +186,35 @@ namespace Creatures.Character
         {
             if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
 
-            Sounds.Play("Range");
             var throwableId = selectedItem.Id;
+            if (isTripleThrow)
+            {
+                var throwableCount = session.Data.Inventory.Count(throwableId);
+                var availableToThrow = throwableId == SwordId ? throwableCount - 1 : throwableCount;
+                var throwsCount = Mathf.Min(tripleThrowCount, availableToThrow);
+
+                StartCoroutine(DoTripleThrow(throwableId, throwsCount));
+            }
+            else
+            {
+                ThrowAndRemoveFromInventory(throwableId);
+            }
+
+            isTripleThrow = false;
+        }
+
+        private IEnumerator DoTripleThrow(string throwableId, int throwsCount)
+        {
+            for (var i = 0; i < throwsCount; i++)
+            {
+                ThrowAndRemoveFromInventory(throwableId);
+                yield return new WaitForSeconds(tripleThrowDelay);
+            }
+        }
+
+        private void ThrowAndRemoveFromInventory(string throwableId)
+        {
+            Sounds.Play("Range");
             var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
             
             throwSpawner.SetPrefab(throwableDef.Projectile);
@@ -189,11 +225,17 @@ namespace Creatures.Character
             isLastSwordThrowing = false;
             UpdateHeroWeapon();
         }
-        
+
+        public void StartThrowing()
+        {
+            tripleThrowHoldCooldown.Reset();
+        }
 
         public void Throw()
         {
             if (!throwCooldown.IsReady || !CanThrow) return;
+
+            isTripleThrow = tripleThrowHoldCooldown.IsReady;
             Animator.SetTrigger(ThrowKey);
                 
             throwCooldown.Reset();

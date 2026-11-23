@@ -25,6 +25,11 @@ namespace UI.Hud
             healthBar.SetProgress(value);
         }
 
+        public void OnSettings()
+        {
+            Components.PauseComponent.Pause();
+        }
+
         private void UpdateHealthBar()
         {
             
@@ -32,7 +37,8 @@ namespace UI.Hud
 
         private void OnDestroy()
         {
-            session.Data.Hp.OnChanged -= OnHealthChanged;
+            if (session != null)
+                session.Data.Hp.OnChanged -= OnHealthChanged;
         }
     }
 }

@@ -470,6 +470,10 @@ MonoBehaviour:
   unarmed: {fileID: 9100000, guid: 6f0704128a72e504e8b169b7b5551bce, type: 2}
   throwCooldown:
     value: 1
+  tripleThrowHoldCooldown:
+    value: 1
+  tripleThrowCount: 3
+  tripleThrowDelay: 0.2
   throwSpawner: {fileID: 4783502177474415700}
 --- !u!114 &7509153539458339685
 MonoBehaviour:

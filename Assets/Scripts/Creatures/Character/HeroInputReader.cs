@@ -38,10 +38,11 @@ namespace Creatures.Character
       
       public void OnThrow(InputAction.CallbackContext context)
       {
-         if (context.performed)
-         {
+         if (context.started)
+            hero.StartThrowing();
+
+         if (context.canceled)
             hero.Throw();
-         }
       }
 
       public void OnUsePotion(InputAction.CallbackContext context)

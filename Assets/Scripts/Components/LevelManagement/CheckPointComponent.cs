@@ -1,5 +1,4 @@
-﻿using System;
-using Components.GOBased;
+﻿using Components.GOBased;
 using Model;
 using UnityEngine;
 using UnityEngine.Events;
