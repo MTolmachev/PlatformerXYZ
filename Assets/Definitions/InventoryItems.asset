@@ -15,7 +15,7 @@ MonoBehaviour:
   items:
   - id: Coin
     icon: {fileID: 6582046967323461550, guid: 4bf570231f136924baadd30fc11fe93c, type: 3}
-    tags: 0000000001000000
+    tags: 00000000
   - id: Sword
     icon: {fileID: 21300000, guid: d5ca5d25aae985945b297bee4ad960d1, type: 3}
     tags: 000000000100000002000000

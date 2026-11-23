@@ -1,4 +1,7 @@
-﻿using Model.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Components.LevelManagement;
+using Model.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Disposables;
@@ -8,26 +11,52 @@ namespace Model
     public class GameSession : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private string defaultCheckPoint;
         public PlayerData Data => playerData;
 
         private PlayerData _savedData;
         private readonly CompositeDisposable trash =  new CompositeDisposable();
         public QuickInventoryModel QuickInventory { get; private set; }
         private bool _isReloading;
+        
+        private readonly List<string>  checkPoints = new List<string>();
 
         private void Awake()
         {
-            LoadHud();
-            if (IsSessionExist())
+            var existsSession = GetExistsSession();
+            
+            if (existsSession != null)
             {
+                existsSession.StartSession(defaultCheckPoint);
                 Destroy(gameObject);
                 return;
             }
         
-            _savedData = playerData.Clone();
+            Save();
             InitModels();
             DontDestroyOnLoad(this);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            StartSession(defaultCheckPoint);
+        }
+
+        private void StartSession(string defaultCheckpoint)
+        {
+            SetChecked(defaultCheckpoint);
+            
+            LoadHud();
+            SpawnHero();
+        }
+
+        private void SpawnHero()
+        {
+            var checkpoints = FindObjectsOfType<CheckPointComponent>();
+            var lastCheckPoint = checkPoints.Last();
+            foreach (var checkpoint in checkpoints)
+            {
+                if (checkpoint.Id != lastCheckPoint) continue;
+                checkpoint.SpawnHero();
+                break;
+            }
         }
 
         private void InitModels()
@@ -50,7 +79,9 @@ namespace Model
         public void ResetToLevelStart()
         {
             _isReloading = true;
+            trash.Dispose();
             playerData = _savedData.Clone();
+            InitModels();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -65,18 +96,34 @@ namespace Model
             }
         }
 
-        private bool IsSessionExist()
+        private void Save()
+        {
+            _savedData = playerData.Clone();
+        }
+
+        private GameSession GetExistsSession()
         {
             var sessions = FindObjectsOfType<GameSession>();
             foreach (var session in sessions)
             {
                 if (session != this)
                 {
-                    Debug.Log(session.gameObject.name);
-                    return true;
+                    return session;
                 }
             }
-            return false;
+            return null;
+        }
+
+        public bool IsChecked(string id)
+        {
+            return checkPoints.Contains(id);
+        }
+        
+        public void SetChecked(string id)
+        {
+            if (IsChecked(id)) return;
+            Save();
+            checkPoints.Add(id);
         }
     }
 }

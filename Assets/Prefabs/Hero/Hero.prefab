@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 7509153539458339682}
   - component: {fileID: 4795297894837000746}
   - component: {fileID: 1591197649}
+  - component: {fileID: 4759752911505179671}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -514,7 +515,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4759752911505179671}
         m_MethodName: Reload
         m_Mode: 1
         m_Arguments:
@@ -863,6 +864,18 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f8a2f72ebe4b6de41987b5d4a56c38d0, type: 3}
   - id: Hurt
     clip: {fileID: 8300000, guid: fe12591c083f4404e83cecffbd783101, type: 3}
+--- !u!114 &4759752911505179671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509153539458339612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8138a6ff70827fe46842333022c040f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7509153539919358540
 GameObject:
   m_ObjectHideFlags: 0
