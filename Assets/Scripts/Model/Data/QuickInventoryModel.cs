@@ -6,7 +6,7 @@ using Utils.Disposables;
 
 namespace Model.Data
 {
-    public class QuickInventoryModel
+    public class QuickInventoryModel : IDisposable
     {
         private readonly PlayerData data;
         
@@ -70,6 +70,11 @@ namespace Model.Data
 
             item = Inventory[SelectedIndex.Value];
             return true;
+        }
+
+        public void Dispose()
+        {
+            data.Inventory.OnChanged -= OnChangedInventory;
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "items": [
+    { "key": "menu_title", "value": "Menu" },
+    { "key": "button_start", "value": "Start" },
+    { "key": "button_option", "value": "Options" },
+    { "key": "button_exit", "value": "Exit" },
+    { "key": "selected_language", "value": "Selected language: {0}" },
+    { "key": "button_back", "value": "Back" },
+    { "key": "button_locales", "value": "Languages" },
+    { "key": "button_continue", "value": "Continue" },
+    { "key": "button_restart", "value": "Restart" },
+    { "key": "dialog_crabby_get_gem_01", "value": "Bring me a Green Gem!" },
+    { "key": "dialog_crabby_get_gem_02", "value": "And I will show you a miracle." },
+    { "key": "dialog_crabby_gem_obtained_01", "value": "And now the miracle." },
+    { "key": "dialog_crabby_gem_obtained_02", "value": "I have a gem." },
+    { "key": "dialog_crabby_gem_obtained_03", "value": "And you do not." },
+    { "key": "dialog_crabby_gem_obtained_04", "value": "Ha ha ha ha!" },
+    { "key": "dialog_need_key_01", "value": "You need a key!" },
+    { "key": "dialog_need_key_02", "value": "Try to find it." }
+  ]
+}

@@ -1,6 +1,7 @@
 ﻿using Model.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils.Disposables;
 
 namespace Model
 {
@@ -10,6 +11,7 @@ namespace Model
         public PlayerData Data => playerData;
 
         private PlayerData _savedData;
+        private readonly CompositeDisposable trash =  new CompositeDisposable();
         public QuickInventoryModel QuickInventory { get; private set; }
         private bool _isReloading;
 
@@ -31,6 +33,7 @@ namespace Model
         private void InitModels()
         {
             QuickInventory = new QuickInventoryModel(Data);
+            trash.Retain(QuickInventory);
         }
 
         private void LoadHud()
@@ -41,6 +44,7 @@ namespace Model
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            trash.Dispose();
         }
 
         public void ResetToLevelStart()
