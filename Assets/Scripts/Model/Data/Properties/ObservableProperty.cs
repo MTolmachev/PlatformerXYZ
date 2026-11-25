@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Utils.Disposables;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,8 +35,11 @@ namespace Model.Data.Properties
             get => _value;
             set
             {
-                var isSame = _value.Equals(value);
+                var isSame =
+                    EqualityComparer<TPropertyType>.Default.Equals(_value, value);
+
                 if (isSame) return;
+
                 var oldValue = _value;
                 _value = value;
                 InvokeChangedEvent(_value, oldValue);

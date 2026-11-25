@@ -42,7 +42,7 @@ namespace Creatures.Character
             hero.StartThrowing();
 
          if (context.canceled)
-            hero.Throw();
+            hero.UseInventory();
       }
 
       public void OnUsePotion(InputAction.CallbackContext context)

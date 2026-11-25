@@ -1,6 +1,7 @@
 ﻿using Creatures.Character;
 using Model.Data;
 using Model.Definitions;
+using Model.Definitions.Repositories.Items;
 using Utils;
 using UnityEngine;
 

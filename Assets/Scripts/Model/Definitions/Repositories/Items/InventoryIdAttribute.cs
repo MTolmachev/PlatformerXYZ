@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace Model.Definitions
+namespace Model.Definitions.Repositories.Items
 {
     public class InventoryIdAttribute : PropertyAttribute
     {
-        
     }
 }

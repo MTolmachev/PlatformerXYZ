@@ -1,10 +1,12 @@
 ﻿using System;
+using Model.Data;
 using Model.Data.Properties;
 using Model.Definitions;
+using Model.Definitions.Repositories.Items;
 using UnityEngine;
 using Utils.Disposables;
 
-namespace Model.Data
+namespace Model.Models
 {
     public class QuickInventoryModel : IDisposable
     {
@@ -15,6 +17,11 @@ namespace Model.Data
         public readonly IntProperty SelectedIndex =  new IntProperty();
 
         public event Action OnChanged;
+
+        public InventoryItemData SelectedItem =>
+            TryGetSelectedItem(out var selectedItem) ? selectedItem : null;
+
+        public ItemDef SelectedDef => DefsFacade.I.Items.Get(SelectedItem?.Id);
 
         public QuickInventoryModel(PlayerData data)
         {

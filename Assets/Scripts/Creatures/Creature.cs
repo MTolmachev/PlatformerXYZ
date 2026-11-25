@@ -59,13 +59,18 @@ namespace Creatures
         
         private void FixedUpdate()
         {
-            Rb.velocity = new Vector2(direction.x * speed * speedMultiplier, Rb.velocity.y);
+            Rb.velocity = new Vector2(direction.x * CalculateSpeed(), Rb.velocity.y);
 
             UpdateSpriteDirection(direction);
             
             Animator.SetBool(Grounded, IsGrounded());
             Animator.SetFloat(VerticalVelocity, Rb.velocity.y);
             Animator.SetBool(IsRunning, direction.x != 0);
+        }
+
+        protected virtual float CalculateSpeed()
+        {
+            return speed * speedMultiplier;
         }
         
         public void UpdateSpriteDirection(Vector2 dir)

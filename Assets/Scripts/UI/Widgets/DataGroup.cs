@@ -5,7 +5,7 @@ namespace UI.Widgets
 {
     public class DataGroup<TDataType, TItemType> where TItemType : MonoBehaviour, IItemRenderer<TDataType>
     {
-        private readonly List<TItemType> createdItems = new List<TItemType>();
+        protected readonly List<TItemType> CreatedItems = new List<TItemType>();
         private readonly TItemType prefab;
         private readonly Transform container;
 
@@ -15,23 +15,23 @@ namespace UI.Widgets
             this.container = container;
         }
 
-        public void SetData(IList<TDataType> data)
+        public virtual void SetData(IList<TDataType> data)
         {
-            for (var i = createdItems.Count; i < data.Count; i++)
+            for (var i = CreatedItems.Count; i < data.Count; i++)
             {
                 var item = Object.Instantiate(prefab, container);
-                createdItems.Add(item);
+                CreatedItems.Add(item);
             }
 
             for (var i = 0; i < data.Count; i++)
             {
-                createdItems[i].SetData(data[i], i);
-                createdItems[i].gameObject.SetActive(true);
+                CreatedItems[i].SetData(data[i], i);
+                CreatedItems[i].gameObject.SetActive(true);
             }
 
-            for (var i = data.Count; i < createdItems.Count; i++)
+            for (var i = data.Count; i < CreatedItems.Count; i++)
             {
-                createdItems[i].gameObject.SetActive(false);
+                CreatedItems[i].gameObject.SetActive(false);
             }
         }
     }

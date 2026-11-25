@@ -7,6 +7,8 @@ using Components.Health;
 using Model;
 using Model.Data;
 using Model.Definitions;
+using Model.Definitions.Repositories;
+using Model.Definitions.Repositories.Items;
 using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -38,6 +40,9 @@ namespace Creatures.Character
         private bool canDoubleJump;
         private bool isLastSwordThrowing;
         private bool isTripleThrow;
+
+        private readonly Cooldown speedUpCooldown = new Cooldown();
+        private float additionalSpeed;
         
         private GameSession session;
         private HealthComponent healthComponent;
@@ -114,7 +119,7 @@ namespace Creatures.Character
                 MakeJump();
                 canDoubleJump = true;
             }
-            else if (canDoubleJump)
+            else if (canDoubleJump && session.PerksModel.TryUse("double-jump"))
             {
                 MakeJump();
                 canDoubleJump = false;
@@ -187,7 +192,7 @@ namespace Creatures.Character
             if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
 
             var throwableId = selectedItem.Id;
-            if (isTripleThrow)
+            if (isTripleThrow && session.PerksModel.TryUse("super-throw"))
             {
                 var throwableCount = session.Data.Inventory.Count(throwableId);
                 var availableToThrow = throwableId == SwordId ? throwableCount - 1 : throwableCount;
@@ -203,6 +208,7 @@ namespace Creatures.Character
             isTripleThrow = false;
         }
 
+        
         private IEnumerator DoTripleThrow(string throwableId, int throwsCount)
         {
             for (var i = 0; i < throwsCount; i++)
@@ -215,7 +221,7 @@ namespace Creatures.Character
         private void ThrowAndRemoveFromInventory(string throwableId)
         {
             Sounds.Play("Range");
-            var throwableDef = DefsFacade.I.ThrowableItems.Get(throwableId);
+            var throwableDef = DefsFacade.I.Throwable.Get(throwableId);
             
             throwSpawner.SetPrefab(throwableDef.Projectile);
             throwSpawner.Spawn();
@@ -241,18 +247,53 @@ namespace Creatures.Character
             throwCooldown.Reset();
         }
 
+        public void UseInventory()
+        {
+            if (IsSelectedItem(ItemTag.Throwable))
+                Throw();
+            else if (IsSelectedItem(ItemTag.Potion))
+                UsePotion();
+        }
+
         public void UsePotion()
         {
             if (!session.QuickInventory.TryGetSelectedItem(out var selectedItem)) return;
 
-            var itemDef = DefsFacade.I.Items.Get(selectedItem.Id);
-            if (!itemDef.HasTag(ItemTag.Healing)) return;
+            var potion = DefsFacade.I.Potions.Get(selectedItem.Id);
+            if (potion.IsVoid) return;
 
-            var healthItemDef = DefsFacade.I.HealthItems.Get(selectedItem.Id);
-            if (healthItemDef.IsVoid) return;
+            switch (potion.Effect)
+            {
+                case Effect.AddHp:
+                    if (!healthComponent.TryHeal((int) potion.Value))
+                        return;
+                    break;
+                case Effect.SpeedUp:
+                    if (potion.Value <= 0f || potion.Time <= 0f)
+                        return;
 
-            if (healthComponent.TryHeal(healthItemDef.HealAmount))
-                session.Data.Inventory.Remove(selectedItem.Id, 1);
+                    speedUpCooldown.Value = speedUpCooldown.TimeLasts + potion.Time;
+                    additionalSpeed = Mathf.Max(potion.Value, additionalSpeed);
+                    speedUpCooldown.Reset();
+                    break;
+                default:
+                    return;
+            }
+
+            session.Data.Inventory.Remove(potion.Id, 1);
+        }
+
+        protected override float CalculateSpeed()
+        {
+            if (speedUpCooldown.IsReady)
+                additionalSpeed = 0f;
+
+            return base.CalculateSpeed() + additionalSpeed;
+        }
+
+        private bool IsSelectedItem(ItemTag tag)
+        {
+            return session != null && session.QuickInventory.SelectedDef.HasTag(tag);
         }
 
         public void MakePause()

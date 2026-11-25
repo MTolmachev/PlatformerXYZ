@@ -2,6 +2,7 @@
 using System.Linq;
 using Components.LevelManagement;
 using Model.Data;
+using Model.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Disposables;
@@ -17,6 +18,7 @@ namespace Model
         private PlayerData _savedData;
         private readonly CompositeDisposable trash =  new CompositeDisposable();
         public QuickInventoryModel QuickInventory { get; private set; }
+        public PerksModel PerksModel { get; private set; }
         private bool _isReloading;
         
         private readonly List<string>  checkPoints = new List<string>();
@@ -63,7 +65,12 @@ namespace Model
         {
             QuickInventory = new QuickInventoryModel(Data);
             trash.Retain(QuickInventory);
+
+            PerksModel = new PerksModel(Data);
+            trash.Retain(PerksModel);
         }
+
+        
 
         private void LoadHud()
         {

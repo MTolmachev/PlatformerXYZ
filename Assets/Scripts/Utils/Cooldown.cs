@@ -10,6 +10,14 @@ namespace Utils
 
         private float timesUp;
         public bool IsReady => timesUp <= Time.time;
+
+        public float Value
+        {
+            get => value;
+            set => this.value = value;
+        }
+
+        public float TimeLasts => Mathf.Max(timesUp - Time.time, 0f);
         
         public void Reset()
         {

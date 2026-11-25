@@ -21,7 +21,8 @@ namespace UI.PauseMenu
 
         public void OnShowSettings()
         {
-            var window = Resources.Load<GameObject>("UI/SettingsWindow");
+            //var window = Resources.Load<GameObject>("UI/SettingsWindow");
+            var window = Resources.Load<GameObject>("UI/ManagePerksWindow");
             var canvas = FindObjectOfType<Canvas>();
             Instantiate(window, canvas.transform);
         }

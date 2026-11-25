@@ -10,12 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4233a4cf2ae94e3187ba7ed255d3f81c, type: 3}
-  m_Name: HealthItems
+  m_Name: Potions
   m_EditorClassIdentifier: 
-  items:
-  - id: HealthPotionSmall
-    healAmount: 3
-  - id: HealthPotion
-    healAmount: 5
-  - id: HealthPotionLarge
-    healAmount: 10
+  _collection:
+  - _id: HealthPotionSmall
+    _effect: 0
+    _value: 3
+    _time: 0
+  - _id: HealthPotion
+    _effect: 0
+    _value: 5
+    _time: 0
+  - _id: HealthPotionLarge
+    _effect: 0
+    _value: 10
+    _time: 0
+  - _id: SpeedUpPotion
+    _effect: 1
+    _value: 10
+    _time: 5

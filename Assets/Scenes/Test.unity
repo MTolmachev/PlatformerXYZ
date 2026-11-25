@@ -9601,9 +9601,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData:
     inventory:
-      inventory: []
+      inventory:
+      - Id: Gem
+        Value: 100
+      - Id: Sword
+        Value: 30
     Hp:
       _value: 10
+    Perks:
+      used:
+        _value: 
+      unlocked: []
   defaultCheckPoint: level1-checkpoint1
 --- !u!4 &2112915835
 Transform:

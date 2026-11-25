@@ -1,10 +1,10 @@
-﻿namespace Model.Definitions
+namespace Model.Definitions.Repositories.Items
 {
     public enum ItemTag
     {
         Stackable,
         Usable,
         Throwable,
-        Healing
+        Potion
     }
 }

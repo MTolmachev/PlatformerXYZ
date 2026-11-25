@@ -12,6 +12,7 @@ namespace Model.Data
         public InventoryData Inventory => inventory;
         
         public IntProperty Hp = new IntProperty();
+        public PerksData Perks = new PerksData();
         
         public PlayerData Clone()
         {

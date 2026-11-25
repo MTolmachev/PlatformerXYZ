@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model.Definitions;
+using Model.Definitions.Repositories;
+using Model.Definitions.Repositories.Items;
 using UnityEngine;
 
 namespace Model.Data
@@ -134,6 +136,27 @@ namespace Model.Data
                     count += item.Value;
             }
             return count;
+        }
+
+        public bool IsEnough(params ItemWithCount[] items)
+        {
+            var requiredItems = new Dictionary<string, int>();
+
+            foreach (var item in items)
+            {
+                if (requiredItems.ContainsKey(item.ItemId))
+                    requiredItems[item.ItemId] += item.Count;
+                else
+                    requiredItems.Add(item.ItemId, item.Count);
+            }
+
+            foreach (var requiredItem in requiredItems)
+            {
+                if (Count(requiredItem.Key) < requiredItem.Value)
+                    return false;
+            }
+
+            return true;
         }
 
     }
