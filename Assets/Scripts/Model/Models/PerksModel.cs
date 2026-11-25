@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mime;
+using System.Collections.Generic;
 using Model.Data;
 using Model.Data.Properties;
 using Model.Definitions;
@@ -14,7 +15,7 @@ namespace Model.Models
         public readonly StringProperty InterfaceSelection = new StringProperty();
 
         private readonly CompositeDisposable trash = new CompositeDisposable();
-        private readonly Cooldown cooldown = new Cooldown();
+        private readonly Dictionary<string, Cooldown> cooldowns = new Dictionary<string, Cooldown>();
         public event Action OnChanged;
         public PerksModel(PlayerData data)
         {
@@ -34,16 +35,32 @@ namespace Model.Models
         public string Used => data.Perks.Used.Value;
         public bool IsSuperThrowSupported => data.Perks.Used.Value == "super-throw"; 
         public bool IsDoubleJumpSupported => data.Perks.Used.Value == "double-jump";
-        public float CooldownProgress => cooldown.Value <= 0f ? 0f : cooldown.TimeLasts / cooldown.Value;
-
         public bool TryUse(string id)
         {
-            if (!IsUsed(id) || !cooldown.IsReady) return false;
+            if (!IsUsed(id)) return false;
 
-            var def = DefsFacade.I.Perks.Get(id);
-            cooldown.Value = def.Cooldown;
+            var cooldown = GetCooldown(id);
+            if (!cooldown.IsReady) return false;
+
             cooldown.Reset();
             return true;
+        }
+
+        public float GetCooldownProgress(string id)
+        {
+            var cooldown = GetCooldown(id);
+            return cooldown.Value <= 0f ? 0f : cooldown.TimeLasts / cooldown.Value;
+        }
+
+        private Cooldown GetCooldown(string id)
+        {
+            if (cooldowns.TryGetValue(id, out var cooldown))
+                return cooldown;
+
+            var def = DefsFacade.I.Perks.Get(id);
+            cooldown = new Cooldown {Value = def.Cooldown};
+            cooldowns.Add(id, cooldown);
+            return cooldown;
         }
 
         public void Unlock(string id)

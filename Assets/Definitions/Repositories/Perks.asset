@@ -26,4 +26,4 @@ MonoBehaviour:
     price:
       itemId: Gem
       count: 10
-    cooldown: 5
+    cooldown: 20

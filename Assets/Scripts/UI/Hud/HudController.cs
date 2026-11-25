@@ -35,7 +35,7 @@ namespace UI.Hud
             var perk = DefsFacade.I.Perks.Get(usedPerk);
             perkIcon.sprite = perk.Icon;
             perkCooldown.sprite = perk.Icon;
-            perkCooldown.fillAmount = session.PerksModel.CooldownProgress;
+            perkCooldown.fillAmount = session.PerksModel.GetCooldownProgress(usedPerk);
         }
 
         private void OnHealthChanged(int newValue, int oldValue)
